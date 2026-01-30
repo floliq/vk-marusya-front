@@ -1,0 +1,45 @@
+name: Check Build & Startup
+
+on: [push]
+
+jobs:
+  check-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Test production build
+        run: |
+          # Устанавливаем serve для тестирования статической сборки
+          npm install -g serve
+
+          # Запускаем статический сервер на порту 4173 (или другом свободном)
+          serve -s dist -l 3000 > /dev/null 2>&1 &
+          SERVER_PID=$!
+
+          # Ждем запуска
+          sleep 5
+
+          # Проверяем доступность
+          if curl --retry 3 --retry-delay 2 --retry-all-errors http://localhost:3000; then
+            echo "✅ Production build works correctly"
+            kill $SERVER_PID 2>/dev/null || true
+            exit 0
+          else
+            echo "❌ Production build failed to serve"
+            kill $SERVER_PID 2>/dev/null || true
+            exit 1
+          fi
