@@ -1,7 +1,7 @@
-import type { JSX } from "react"
-import { useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import styles from "./Counter.module.css"
+import type { JSX } from 'react';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import styles from './Counter.module.css';
 import {
   decrement,
   increment,
@@ -10,32 +10,32 @@ import {
   incrementIfOdd,
   selectCount,
   selectStatus,
-} from "./counterSlice"
+} from './counterSlice';
 
 export const Counter = (): JSX.Element => {
-  const dispatch = useAppDispatch()
-  const count = useAppSelector(selectCount)
-  const status = useAppSelector(selectStatus)
-  const [incrementAmount, setIncrementAmount] = useState("2")
+  const dispatch = useAppDispatch();
+  const count = useAppSelector(selectCount);
+  const status = useAppSelector(selectStatus);
+  const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0
+  const incrementValue = Number(incrementAmount) || 0;
 
   return (
     <div>
       <div className={styles.row}>
         <button
           className={styles.button}
-          aria-label="Decrement value"
+          aria-label='Decrement value'
           onClick={() => dispatch(decrement())}
         >
           -
         </button>
-        <label aria-label="Count" className={styles.value}>
+        <label aria-label='Count' className={styles.value}>
           {count}
         </label>
         <button
           className={styles.button}
-          aria-label="Increment value"
+          aria-label='Increment value'
           onClick={() => dispatch(increment())}
         >
           +
@@ -44,11 +44,11 @@ export const Counter = (): JSX.Element => {
       <div className={styles.row}>
         <input
           className={styles.textbox}
-          aria-label="Set increment amount"
+          aria-label='Set increment amount'
           value={incrementAmount}
-          type="number"
-          onChange={e => {
-            setIncrementAmount(e.target.value)
+          type='number'
+          onChange={(e) => {
+            setIncrementAmount(e.target.value);
           }}
         />
         <button
@@ -58,10 +58,10 @@ export const Counter = (): JSX.Element => {
           Add Amount
         </button>
         <button
-          className={styles.asyncButton}
-          disabled={status !== "idle"}
+          className={styles['async-button']}
+          disabled={status !== 'idle'}
           onClick={() => {
-            void dispatch(incrementAsync(incrementValue))
+            void dispatch(incrementAsync(incrementValue));
           }}
         >
           Add Async
@@ -69,12 +69,12 @@ export const Counter = (): JSX.Element => {
         <button
           className={styles.button}
           onClick={() => {
-            dispatch(incrementIfOdd(incrementValue))
+            dispatch(incrementIfOdd(incrementValue));
           }}
         >
           Add If Odd
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
