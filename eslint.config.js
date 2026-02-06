@@ -54,6 +54,7 @@ const eslintConfig = defineConfig(
       },
     },
     rules: {
+      '@typescript-eslint/restrict-template-expressions': 'off',
       'no-undef': [0],
       '@typescript-eslint/consistent-type-definitions': [2, 'type'],
       '@typescript-eslint/consistent-type-imports': [

@@ -1,0 +1,11 @@
+export { GenresIcon } from './GenresIcon';
+export { LikeIcon } from './LikeIcon';
+export { ProfileIcon } from './ProfileIcon';
+export { RatingIcon } from './RatingIcon';
+export { ReloadIcon } from './ReloadIcon';
+export { SearchBtnIcon } from './SearchBtnIcon';
+export { SearchIcon } from './SearchIcon';
+export { VkIcon } from './VkIcon';
+export { YoutubeIcon } from './YoutubeIcon';
+export { OkIcon } from './OkIcon';
+export { TelegramIcon } from './TelegramIcon';

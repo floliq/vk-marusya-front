@@ -1,0 +1,25 @@
+.mobile-menu {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (width <= 1024px) {
+    display: flex;
+  }
+
+  &__logo {
+    width: 81px;
+    height: 18px;
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+  }
+
+  &__btn {
+    &:not(:last-child) {
+      margin-right: 23px;
+    }
+  }
+}

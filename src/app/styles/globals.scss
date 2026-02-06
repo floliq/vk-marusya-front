@@ -1,0 +1,104 @@
+@use '@styles/variables' as *;
+
+@import-normalize;
+
+@font-face {
+  font-family: Play;
+  src:
+    url('./fonts/Play-Regular.woff') format('woff'),
+    url('./fonts/Play-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Play;
+  src:
+    url('./fonts/Play-Bold.woff') format('woff'),
+    url('./fonts/Play-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Play, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #000 0%, rgb(39 36 36) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(39 135 245 / 20%) 0%,
+    rgb(163 147 245 / 20%) 100%
+  );
+  position: relative;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1320px;
+}
+
+.fluid {
+  padding: 0;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 48px;
+  color: $primary;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 24px;
+  color: $primary;
+}
