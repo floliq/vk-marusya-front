@@ -1,0 +1,45 @@
+@use '@styles/variables' as *;
+
+.button {
+  padding: 16px;
+  border-radius: 28px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 133%;
+  color: $primary;
+  transition: 0.3s ease;
+
+  &.theme-blue {
+    background: $button;
+  }
+
+  &.theme-dark {
+    background: $placeholder;
+  }
+
+  &.theme-light {
+    background: $primary;
+    color: $black;
+  }
+
+  &.theme-blue:focus,
+  &.theme-blue:hover,
+  &.theme-blue:active {
+    background-color: $button-disabled;
+    color: $disabled;
+  }
+
+  &.theme-dark:focus,
+  &.theme-dark:hover,
+  &.theme-dark:active {
+    background-color: $black-disabled;
+    color: $disabled;
+  }
+
+  &.theme-light:focus,
+  &.theme-light:hover,
+  &.theme-light:active {
+    background-color: $black-disabled;
+    color: $disabled;
+  }
+}

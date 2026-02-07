@@ -1,0 +1,74 @@
+@use '@styles/variables' as *;
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black-opacity-50;
+  z-index: 1000;
+  animation: fade-in 0.3s ease-out;
+
+  &__content {
+    position: relative;
+    padding: 64px 40px 40px;
+    margin: 0 20px;
+    width: 420px;
+    background: $primary;
+    border-radius: 24px;
+    animation: slide-in 0.3s ease-out;
+
+    @media (width <=586px) {
+      padding: 64px 20px 20px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: -72px;
+    width: 48px;
+    height: 48px;
+    background: $primary;
+    border-radius: 24px;
+
+    & path {
+      fill: $black;
+      transition: 0.3s ease;
+    }
+
+    &:focus path,
+    &:hover path,
+    &:active path {
+      fill: $active;
+    }
+
+    @media (width <=586px) {
+      top: 6px;
+      right: 6px;
+    }
+  }
+}

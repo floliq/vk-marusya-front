@@ -1,0 +1,15 @@
+.auth {
+  display: flex;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  &__logo {
+    margin-bottom: 40px;
+    width: 156px;
+  }
+}

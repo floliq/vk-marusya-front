@@ -1,6 +1,6 @@
 import styles from './Banner.module.scss';
 
-import { Container } from '@/shared/ui';
+import { Button, Container } from '@/shared/ui';
 import { LikeIcon, RatingIcon, ReloadIcon } from '@/shared/ui/Icons';
 
 export const Banner = () => {
@@ -26,8 +26,12 @@ export const Banner = () => {
             </p>
 
             <div className={styles.banner__btns}>
-              <button className={styles.banner__trailer}>Трейлер</button>
-              <button className={styles.banner__about}>О фильме</button>
+              <Button theme='blue' className={styles.banner__trailer}>
+                Трейлер
+              </Button>
+              <Button theme='dark' className={styles.banner__about}>
+                О фильме
+              </Button>
               <button className={styles.banner__favourite}>
                 <LikeIcon />
               </button>

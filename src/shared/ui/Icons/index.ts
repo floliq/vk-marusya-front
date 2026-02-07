@@ -9,3 +9,7 @@ export { VkIcon } from './VkIcon';
 export { YoutubeIcon } from './YoutubeIcon';
 export { OkIcon } from './OkIcon';
 export { TelegramIcon } from './TelegramIcon';
+export { EmailIcon } from './Auth/EmailIcon';
+export { PasswordIcon } from './Auth/PasswordIcon';
+export { CloseIcon } from './Auth/CloseIcon';
+export { UserIcon } from './Auth/UserIcon';

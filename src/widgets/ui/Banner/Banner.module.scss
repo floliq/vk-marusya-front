@@ -108,25 +108,7 @@
   }
 
   &__trailer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
     width: 171px;
-    background-color: $button;
-    border-radius: 28px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 133%;
-    color: $primary;
-    transition: 0.3s ease;
-
-    &:focus,
-    &:hover,
-    &:active {
-      background-color: $button-disabled;
-      color: $disabled;
-    }
 
     @media (width <= 586px) {
       width: 100%;
@@ -134,25 +116,7 @@
   }
 
   &__about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
     width: 183px;
-    background-color: $placeholder;
-    border-radius: 28px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 133%;
-    color: $primary;
-    transition: 0.3s ease;
-
-    &:focus,
-    &:hover,
-    &:active {
-      background-color: $black-disabled;
-      color: $disabled;
-    }
 
     @media (width <= 586px) {
       width: 50%;

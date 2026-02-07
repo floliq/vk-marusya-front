@@ -2,13 +2,17 @@ import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { GenresIcon, ProfileIcon, SearchBtnIcon } from '@/shared/ui/Icons';
 
-export const MobileMenu = () => {
+type MobileMenuProps = {
+  onAuthClick: () => void;
+};
+
+export const MobileMenu = ({ onAuthClick }: MobileMenuProps) => {
   return (
     <div className={styles['mobile-menu']}>
       <NavLink to={'/'}>
         <img
           className={styles['mobile-menu__logo']}
-          src='/logo.png'
+          src='/logo_white.png'
           alt='логотип'
         />
       </NavLink>
@@ -19,7 +23,12 @@ export const MobileMenu = () => {
         <button className={styles['mobile-menu__btn']}>
           <SearchBtnIcon />
         </button>
-        <button className={styles['mobile-menu__btn']}>
+        <button
+          className={styles['mobile-menu__btn']}
+          onClick={() => {
+            onAuthClick();
+          }}
+        >
           <ProfileIcon />
         </button>
       </div>

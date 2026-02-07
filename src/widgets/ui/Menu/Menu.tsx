@@ -1,15 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Menu.module.scss';
-import { Container } from '@/shared/ui';
-import { MobileMenu } from '../..';
+import { Container, Modal } from '@/shared/ui';
+import { MobileMenu } from '@/widgets';
+import { useState } from 'react';
+import { AuthForm } from '@/features';
 
 export const Menu = () => {
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+
   return (
     <header className={styles.menu}>
       <Container>
         <div className={styles.menu__content}>
           <NavLink to={'/'}>
-            <img className={styles.menu__logo} src='/logo.png' alt='логотип' />
+            <img
+              className={styles.menu__logo}
+              src='/logo_white.png'
+              alt='логотип'
+            />
           </NavLink>
           <div className={styles.menu__middle}>
             <NavLink
@@ -38,10 +46,29 @@ export const Menu = () => {
               placeholder='Поиск'
             />
           </div>
-          <button className={styles.menu__link}>Войти</button>
+          <button
+            className={styles.menu__link}
+            onClick={() => {
+              setIsAuthOpen(true);
+            }}
+          >
+            Войти
+          </button>
         </div>
-        <MobileMenu />
+        <MobileMenu
+          onAuthClick={() => {
+            setIsAuthOpen(true);
+          }}
+        />
       </Container>
+      <Modal
+        isOpen={isAuthOpen}
+        onClose={() => {
+          setIsAuthOpen(false);
+        }}
+      >
+        <AuthForm />
+      </Modal>
     </header>
   );
 };
