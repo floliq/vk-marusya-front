@@ -1,0 +1,26 @@
+.genre {
+  padding: 64px 0;
+
+  @media (width<=768px) {
+    padding: 16px 0 40px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 64px;
+
+    @media (width<=768px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__back {
+    display: flex;
+  }
+}

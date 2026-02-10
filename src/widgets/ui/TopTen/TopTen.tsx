@@ -16,7 +16,7 @@ export const TopTen = () => {
                 <span className={styles.top__number}>{num}</span>
                 <img
                   className={styles.top__banner}
-                  src='/poster.webp'
+                  src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
                   alt={`Фильм ${num}`}
                 />
               </li>

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Genres, Home } from '@/pages';
+import { GenreDetail, Genres, Home } from '@/pages';
 import { Layout } from '../Layout';
 
 export const router = createBrowserRouter([
@@ -16,6 +16,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Genres />
+      </Layout>
+    ),
+  },
+  {
+    path: '/genres/:genre',
+    element: (
+      <Layout>
+        <GenreDetail />
       </Layout>
     ),
   },

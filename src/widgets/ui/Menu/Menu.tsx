@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Menu.module.scss';
 import { Container, Modal } from '@/shared/ui';
-import { MobileMenu } from '@/widgets';
+import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
-import { AuthForm } from '@/features';
+import { AuthForm } from '@/features/auth';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);

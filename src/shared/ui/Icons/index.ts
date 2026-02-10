@@ -13,3 +13,4 @@ export { EmailIcon } from './Auth/EmailIcon';
 export { PasswordIcon } from './Auth/PasswordIcon';
 export { CloseIcon } from './Auth/CloseIcon';
 export { UserIcon } from './Auth/UserIcon';
+export { BackIcon } from './BackIcon';

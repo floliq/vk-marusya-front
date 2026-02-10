@@ -1,7 +1,6 @@
 import styles from './AuthForm.module.scss';
 import { useState } from 'react';
-import { LoginForm } from '../LoginForm/LoginForm';
-import { RegisterForm } from '../RegisterForm/RegisterForm';
+import { LoginForm, RegisterForm } from '@/features/auth';
 
 export const AuthForm = () => {
   const [authState, setAuthState] = useState<'login' | 'register'>('login');
