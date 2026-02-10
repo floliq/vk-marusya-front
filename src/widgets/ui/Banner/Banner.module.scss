@@ -77,14 +77,6 @@
 
   &__title {
     margin-bottom: 16px;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 117%;
-    color: $primary;
-
-    @media (width <= 768px) {
-      font-size: 24px;
-    }
   }
 
   &__desc {
@@ -104,7 +96,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
   }
 
   &__trailer {

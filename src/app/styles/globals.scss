@@ -94,11 +94,10 @@ button {
 .title {
   font-weight: 700;
   font-size: 48px;
+  line-height: 117%;
   color: $primary;
-}
 
-.text {
-  font-weight: 400;
-  font-size: 24px;
-  color: $primary;
+  @media (width <= 768px) {
+    font-size: 24px;
+  }
 }

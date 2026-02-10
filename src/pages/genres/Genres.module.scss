@@ -1,0 +1,35 @@
+.genres {
+  padding: 64px 0;
+
+  @media (width<=768px) {
+    padding: 16px 0 40px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: 64px;
+
+    @media (width<=768px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 64px 40px;
+
+    @media (width<=768px) {
+      justify-content: center;
+    }
+
+    @media (width<=480px) {
+      gap: 24px;
+    }
+  }
+}

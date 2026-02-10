@@ -18,7 +18,7 @@ export const Banner = () => {
               <p className={styles.banner__short}>детектив</p>
               <p className={styles.banner__short}>1 ч 7 мин</p>
             </div>
-            <h2 className={styles.banner__title}>
+            <h2 className={`${styles.banner__title} title`}>
               Шерлок Холмс и доктор Ватсон: Знакомство
             </h2>
             <p className={styles.banner__desc}>
