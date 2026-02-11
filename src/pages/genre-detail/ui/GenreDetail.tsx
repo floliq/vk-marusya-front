@@ -2,7 +2,7 @@ import { translateGenre } from '@/features/genres';
 import styles from './GenreDetail.module.scss';
 
 import { BackIcon } from '@/shared/ui/Icons';
-import { FilmList } from '@/widgets';
+import { FilmList } from './film-list/FilmList';
 import { Link, useParams } from 'react-router-dom';
 
 export const GenreDetail = () => {

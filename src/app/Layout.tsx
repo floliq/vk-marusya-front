@@ -1,5 +1,6 @@
 import '@/app/styles/globals.scss';
-import { Footer, Menu } from '@/widgets';
+import { Footer } from '@/widgets/footer';
+import { Menu } from '@/widgets/menu';
 
 type LayoutProps = {
   children: React.ReactNode;

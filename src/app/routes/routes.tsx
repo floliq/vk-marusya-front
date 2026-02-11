@@ -1,5 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Film, GenreDetail, Genres, Home } from '@/pages';
+import { Film } from '@/pages/film';
+import { GenreDetail } from '@/pages/genre-detail';
+import { Genres } from '@/pages/genres';
+import { Home } from '@/pages/home';
 import { Layout } from '../Layout';
 
 export const router = createBrowserRouter([
