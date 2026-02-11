@@ -1,10 +1,10 @@
 /** @type {import("stylelint").Config} */
 export default {
-  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
-  "rules": {
-    "at-rule-no-unknown": null,
-    "scss/at-rule-no-unknown": true,
-    "selector-class-pattern": null,
-    "custom-property-pattern": null
-  }
-}
+  extends: ['stylelint-config-standard', 'stylelint-config-standard-scss'],
+  rules: {
+    'at-rule-no-unknown': null,
+    'scss/at-rule-no-unknown': true,
+    'selector-class-pattern': null,
+    'custom-property-pattern': null,
+  },
+};

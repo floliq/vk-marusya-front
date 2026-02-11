@@ -1,0 +1,140 @@
+@use '@styles/variables' as *;
+
+.film-banner {
+  padding: 32px 0;
+
+  @media (width <= 1024px) {
+    padding: 0 0 32px;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (width <= 1024px) {
+      flex-direction: column;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    @media (width <= 1024px) {
+      order: 2;
+      width: 100%;
+    }
+  }
+
+  &__right {
+    width: 50%;
+
+    @media (width <= 1024px) {
+      order: -1;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__shorts {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    margin-right: 16px;
+    background-color: $green;
+    border-radius: 16px;
+  }
+
+  &__mark {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: $primary;
+  }
+
+  &__short {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    color: $secondary;
+
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+
+    @media (width <= 768px) {
+      font-size: 14px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__desc {
+    margin-bottom: 60px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 133%;
+    color: $secondary;
+
+    @media (width <= 768px) {
+      margin-bottom: 32px;
+      font-size: 18px;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    @media (width <= 576px) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__trailer {
+    width: 171px;
+
+    @media (width <= 576px) {
+      width: 100%;
+    }
+  }
+
+  &__favourite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    width: 68px;
+    background-color: $placeholder;
+    border-radius: 28px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: $primary;
+    transition: 0.3s ease;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background-color: $black-disabled;
+      color: $disabled;
+    }
+  }
+
+  &__picture {
+    width: 100%;
+    border-radius: 16px;
+  }
+}

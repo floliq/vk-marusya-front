@@ -11,6 +11,7 @@ export const FilmList = () => {
         {films.map((num) => (
           <FilmItem
             key={num}
+            id={num}
             image_url='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
           />
         ))}

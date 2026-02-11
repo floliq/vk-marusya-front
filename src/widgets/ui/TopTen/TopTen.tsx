@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './TopTen.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
@@ -13,12 +14,14 @@ export const TopTen = () => {
           <ul className={styles.top__films}>
             {films.map((num) => (
               <li key={num} className={styles.top__film}>
-                <span className={styles.top__number}>{num}</span>
-                <img
-                  className={styles.top__banner}
-                  src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-                  alt={`Фильм ${num}`}
-                />
+                <Link to={`/films/${num}`}>
+                  <span className={styles.top__number}>{num}</span>
+                  <img
+                    className={styles.top__banner}
+                    src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+                    alt={`Фильм ${num}`}
+                  />
+                </Link>
               </li>
             ))}
           </ul>
@@ -42,12 +45,14 @@ export const TopTen = () => {
             {films.map((num) => (
               <SwiperSlide key={num} className={styles.swiperSlide}>
                 <div className={styles.top__film}>
-                  <span className={styles.top__number}>{num}</span>
-                  <img
-                    className={styles.top__banner}
-                    src='/poster.webp'
-                    alt={`Фильм ${num}`}
-                  />
+                  <Link to={`/films/${num}`}>
+                    <span className={styles.top__number}>{num}</span>
+                    <img
+                      className={styles.top__banner}
+                      src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+                      alt={`Фильм ${num}`}
+                    />
+                  </Link>
                 </div>
               </SwiperSlide>
             ))}

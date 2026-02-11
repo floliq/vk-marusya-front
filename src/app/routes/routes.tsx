@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { GenreDetail, Genres, Home } from '@/pages';
+import { Film, GenreDetail, Genres, Home } from '@/pages';
 import { Layout } from '../Layout';
 
 export const router = createBrowserRouter([
@@ -24,6 +24,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <GenreDetail />
+      </Layout>
+    ),
+  },
+  {
+    path: '/films/:filmId',
+    element: (
+      <Layout>
+        <Film />
       </Layout>
     ),
   },
