@@ -1,0 +1,90 @@
+@use '@styles/variables' as *;
+
+.profile-settings {
+  display: flex;
+  flex-direction: column;
+
+  @media (width <= 1024px) {
+    padding: 40px 25px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 64px;
+  }
+
+  &__item {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 16px;
+    width: 60px;
+    height: 60px;
+    background: $disabled;
+    border-radius: 100%;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 133%;
+    color: $primary;
+
+    @media (width <= 1024px) {
+      margin-right: 24px;
+      width: 48px;
+      height: 48px;
+    }
+
+    & svg {
+      fill: $primary;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    color: $primary;
+
+    @media (width <= 1024px) {
+      margin-bottom: 4px;
+      font-size: 14px;
+      line-height: 143%;
+      color: $disabled;
+    }
+  }
+
+  &__value {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 133%;
+    color: $primary;
+
+    @media (width <= 1024px) {
+      font-size: 18px;
+    }
+  }
+
+  &__signout {
+    width: 262px;
+
+    @media (width <= 540px) {
+      width: 100%;
+    }
+  }
+}

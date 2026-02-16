@@ -1,4 +1,4 @@
-import { CloseIcon } from '../Icons/Auth/CloseIcon';
+import { CloseButton } from '../CloseButton/CloseButton';
 import styles from './Modal.module.scss';
 
 import type { ReactNode } from 'react';
@@ -20,9 +20,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
           e.stopPropagation();
         }}
       >
-        <button className={styles.modal__close} onClick={onClose}>
-          <CloseIcon />
-        </button>
+        <CloseButton onClick={onClose} className={styles.modal__close} />
         {children}
       </div>
     </div>

@@ -1,0 +1,85 @@
+@use '@styles/variables' as *;
+
+.profile {
+  padding: 64px 0;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-bottom: 64px;
+
+    @media (width <= 1024px) {
+      padding: 0 25px;
+      margin-bottom: 40px;
+      font-size: 24px;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    margin-bottom: 64px;
+
+    @media (width <= 1024px) {
+      padding: 0 25px;
+      margin-bottom: 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-right: 64px;
+
+      @media (width <= 1024px) {
+        margin-right: 24px;
+      }
+    }
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 133%;
+    color: $primary;
+    transition: 0.3s ease;
+
+    &-active {
+      border-bottom: 1px solid $brand-active;
+    }
+
+    &-text {
+      margin-left: 8px;
+    }
+  }
+
+  &__settings,
+  &__featured {
+    &-long {
+      display: block;
+
+      @media (width <= 1024px) {
+        display: none;
+      }
+    }
+
+    &-short {
+      display: none;
+
+      @media (width <= 1024px) {
+        display: block;
+      }
+    }
+  }
+}

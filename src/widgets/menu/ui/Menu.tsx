@@ -7,6 +7,7 @@ import { AuthForm } from './auth-form/AuthForm';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isAuth] = useState(true);
 
   return (
     <header className={styles.menu}>
@@ -46,16 +47,31 @@ export const Menu = () => {
               placeholder='Поиск'
             />
           </div>
-          <button
-            className={styles.menu__link}
-            onClick={() => {
-              setIsAuthOpen(true);
-            }}
-          >
-            Войти
-          </button>
+
+          {!isAuth ? (
+            <button
+              className={styles.menu__link}
+              onClick={() => {
+                setIsAuthOpen(true);
+              }}
+            >
+              Войти
+            </button>
+          ) : (
+            <NavLink
+              to={'/profile'}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.menu__link} ${styles.menu__auth} ${styles['menu__link-active']}`
+                  : `${styles.menu__link} ${styles.menu__auth}`
+              }
+            >
+              Константин
+            </NavLink>
+          )}
         </div>
         <MobileMenu
+          isAuth={isAuth}
           onAuthClick={() => {
             setIsAuthOpen(true);
           }}

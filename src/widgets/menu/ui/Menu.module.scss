@@ -51,6 +51,11 @@
     }
   }
 
+  &__auth {
+    display: flex;
+    height: 55px;
+  }
+
   &__search {
     flex-grow: 1;
     padding: 16px 12px 16px 55px;

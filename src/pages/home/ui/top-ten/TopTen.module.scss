@@ -80,6 +80,7 @@
     line-height: 133%;
     color: $brand-active;
     transform: translate(-25%, -25%);
+    z-index: 1;
   }
 
   &__swiper {

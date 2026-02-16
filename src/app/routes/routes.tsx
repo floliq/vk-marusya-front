@@ -4,6 +4,7 @@ import { GenreDetail } from '@/pages/genre-detail';
 import { Genres } from '@/pages/genres';
 import { Home } from '@/pages/home';
 import { Layout } from '../Layout';
+import { Profile } from '@/pages/profile';
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Film />
+      </Layout>
+    ),
+  },
+  {
+    path: '/profile',
+    element: (
+      <Layout>
+        <Profile />
       </Layout>
     ),
   },

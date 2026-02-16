@@ -1,0 +1,53 @@
+.featured {
+  display: flex;
+
+  @media (width <= 1024px) {
+    display: none;
+  }
+
+  &-mobile {
+    display: none;
+
+    @media (width <= 1024px) {
+      display: block;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 64px 40px;
+  }
+
+  &__item {
+    position: relative;
+
+    &:hover .featured__close {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(50%, -50%);
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+    z-index: 1;
+
+    @media (width <= 1024px) {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__swiper {
+    padding: 80px 20px !important;
+  }
+}

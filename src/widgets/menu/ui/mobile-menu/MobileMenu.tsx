@@ -3,10 +3,11 @@ import styles from './MobileMenu.module.scss';
 import { GenresIcon, ProfileIcon, SearchBtnIcon } from '@/shared/ui/Icons';
 
 type MobileMenuProps = {
+  isAuth: boolean;
   onAuthClick: () => void;
 };
 
-export const MobileMenu = ({ onAuthClick }: MobileMenuProps) => {
+export const MobileMenu = ({ isAuth, onAuthClick }: MobileMenuProps) => {
   return (
     <div className={styles['mobile-menu']}>
       <NavLink to={'/'}>
@@ -23,14 +24,27 @@ export const MobileMenu = ({ onAuthClick }: MobileMenuProps) => {
         <button className={styles['mobile-menu__btn']}>
           <SearchBtnIcon />
         </button>
-        <button
-          className={styles['mobile-menu__btn']}
-          onClick={() => {
-            onAuthClick();
-          }}
-        >
-          <ProfileIcon />
-        </button>
+        {!isAuth ? (
+          <button
+            className={styles['mobile-menu__btn']}
+            onClick={() => {
+              onAuthClick();
+            }}
+          >
+            <ProfileIcon />
+          </button>
+        ) : (
+          <NavLink
+            to={'/profile'}
+            className={({ isActive }) =>
+              isActive
+                ? `${styles.menu__link} ${styles['menu__link-active']}`
+                : styles.menu__link
+            }
+          >
+            <ProfileIcon />
+          </NavLink>
+        )}
       </div>
     </div>
   );

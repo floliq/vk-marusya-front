@@ -8,10 +8,10 @@ type FilmItemProps = {
 
 export const FilmItem = ({ id, image_url }: FilmItemProps) => {
   return (
-    <li className={styles.films__film}>
+    <div className={styles.film}>
       <Link to={`/films/${id}`}>
-        <img className={styles.films__banner} src={image_url} alt={`Фильм`} />
+        <img className={styles.film__banner} src={image_url} alt={`Фильм`} />
       </Link>
-    </li>
+    </div>
   );
 };

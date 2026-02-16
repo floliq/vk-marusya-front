@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
 import styles from './TopTen.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
+import { FilmItem } from '@/entities/film';
 
 export const TopTen = () => {
   const films = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -14,14 +14,13 @@ export const TopTen = () => {
           <ul className={styles.top__films}>
             {films.map((num) => (
               <li key={num} className={styles.top__film}>
-                <Link to={`/films/${num}`}>
-                  <span className={styles.top__number}>{num}</span>
-                  <img
-                    className={styles.top__banner}
-                    src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-                    alt={`Фильм ${num}`}
-                  />
-                </Link>
+                <span className={styles.top__number}>{num}</span>
+                <FilmItem
+                  id={num}
+                  image_url={
+                    'https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+                  }
+                />
               </li>
             ))}
           </ul>
@@ -35,6 +34,7 @@ export const TopTen = () => {
             navigation
             pagination={{ clickable: true }}
             className={styles.top__swiper}
+            tag='ul'
             breakpoints={{
               320: { slidesPerView: 1.2 },
               480: { slidesPerView: 2.2 },
@@ -44,16 +44,15 @@ export const TopTen = () => {
           >
             {films.map((num) => (
               <SwiperSlide key={num} className={styles.swiperSlide}>
-                <div className={styles.top__film}>
-                  <Link to={`/films/${num}`}>
-                    <span className={styles.top__number}>{num}</span>
-                    <img
-                      className={styles.top__banner}
-                      src='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-                      alt={`Фильм ${num}`}
-                    />
-                  </Link>
-                </div>
+                <li className={styles.top__film}>
+                  <span className={styles.top__number}>{num}</span>
+                  <FilmItem
+                    id={num}
+                    image_url={
+                      'https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+                    }
+                  />
+                </li>
               </SwiperSlide>
             ))}
           </Swiper>

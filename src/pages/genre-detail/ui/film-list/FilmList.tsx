@@ -9,11 +9,12 @@ export const FilmList = () => {
     <>
       <ul className={styles.films}>
         {films.map((num) => (
-          <FilmItem
-            key={num}
-            id={num}
-            image_url='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-          />
+          <li key={num} className={styles.films__item}>
+            <FilmItem
+              id={num}
+              image_url='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+            />
+          </li>
         ))}
       </ul>
       <Button theme='blue' className={styles.films__more}>

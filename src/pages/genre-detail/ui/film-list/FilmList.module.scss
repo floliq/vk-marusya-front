@@ -6,6 +6,10 @@
   flex-wrap: wrap;
   gap: 40px;
 
+  &__item {
+    display: flex;
+  }
+
   &__more {
     margin: 64px auto;
     width: 218px;
