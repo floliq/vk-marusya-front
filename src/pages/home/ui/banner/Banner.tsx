@@ -1,7 +1,7 @@
 import styles from './Banner.module.scss';
 
-import { Button, Container } from '@/shared/ui';
-import { LikeIcon, RatingIcon, ReloadIcon } from '@/shared/ui/Icons';
+import { Button, Container, Rating } from '@/shared/ui';
+import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
 
 export const Banner = () => {
   return (
@@ -10,10 +10,7 @@ export const Banner = () => {
         <div className={styles.banner__content}>
           <div className={styles.banner__left}>
             <div className={styles.banner__shorts}>
-              <div className={styles.banner__rating}>
-                <RatingIcon />
-                <p className={styles.banner__mark}>7,5</p>
-              </div>
+              <Rating mark='7.5' />
               <p className={styles.banner__short}>1979</p>
               <p className={styles.banner__short}>детектив</p>
               <p className={styles.banner__short}>1 ч 7 мин</p>

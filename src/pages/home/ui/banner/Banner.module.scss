@@ -44,22 +44,6 @@
     margin-bottom: 16px;
   }
 
-  &__rating {
-    display: flex;
-    align-items: center;
-    padding: 4px 12px;
-    margin-right: 16px;
-    background-color: $green;
-    border-radius: 16px;
-  }
-
-  &__mark {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 133%;
-    color: $primary;
-  }
-
   &__short {
     font-weight: 400;
     font-size: 18px;

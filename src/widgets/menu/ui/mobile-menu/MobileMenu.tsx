@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { GenresIcon, ProfileIcon, SearchBtnIcon } from '@/shared/ui/Icons';
+import { useState } from 'react';
+import { SearchFilmMobileModal } from '../search-film-mobile-modal/SearchFilmMobileModal';
 
 type MobileMenuProps = {
   isAuth: boolean;
@@ -8,6 +10,8 @@ type MobileMenuProps = {
 };
 
 export const MobileMenu = ({ isAuth, onAuthClick }: MobileMenuProps) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <div className={styles['mobile-menu']}>
       <NavLink to={'/'}>
@@ -21,7 +25,12 @@ export const MobileMenu = ({ isAuth, onAuthClick }: MobileMenuProps) => {
         <NavLink to={'/genres'} className={styles['mobile-menu__btn']}>
           <GenresIcon />
         </NavLink>
-        <button className={styles['mobile-menu__btn']}>
+        <button
+          className={styles['mobile-menu__btn']}
+          onClick={() => {
+            setIsSearchOpen(true);
+          }}
+        >
           <SearchBtnIcon />
         </button>
         {!isAuth ? (
@@ -46,6 +55,12 @@ export const MobileMenu = ({ isAuth, onAuthClick }: MobileMenuProps) => {
           </NavLink>
         )}
       </div>
+      <SearchFilmMobileModal
+        isOpen={isSearchOpen}
+        onClose={() => {
+          setIsSearchOpen(false);
+        }}
+      />
     </div>
   );
 };

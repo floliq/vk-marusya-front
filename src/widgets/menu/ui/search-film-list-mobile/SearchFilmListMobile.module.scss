@@ -1,0 +1,76 @@
+@use '@styles/variables' as *;
+
+.search-film {
+  &__list {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    top: calc(100% + 12px);
+    display: none;
+    padding: 8px;
+    background: $background-secondary;
+    border-radius: 8px;
+    z-index: 100;
+
+    @media (width<=540px) {
+      display: flex;
+    }
+  }
+
+  &__item {
+    width: 100%;
+  }
+
+  &__image {
+    width: 158px;
+    height: 208px;
+    margin-bottom: 16px;
+  }
+
+  &__film {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    width: 220px;
+    transition: 0.3s ease;
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    &:focus,
+    &:hover,
+    &:active {
+      border: 1px solid $disabled;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__shorts {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  &__short {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    color: $secondary;
+
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 133%;
+    color: #fff;
+  }
+}

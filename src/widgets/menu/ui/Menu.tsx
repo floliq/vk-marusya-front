@@ -4,6 +4,7 @@ import { Container, Modal } from '@/shared/ui';
 import { MobileMenu } from './mobile-menu/MobileMenu';
 import { useState } from 'react';
 import { AuthForm } from './auth-form/AuthForm';
+import { SearchFilm } from './search-film/SearchFilm';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -41,11 +42,7 @@ export const Menu = () => {
             >
               Жанры
             </NavLink>
-            <input
-              type='text'
-              className={styles.menu__search}
-              placeholder='Поиск'
-            />
+            <SearchFilm />
           </div>
 
           {!isAuth ? (
