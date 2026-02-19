@@ -1,0 +1,82 @@
+@use '@styles/variables' as *;
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.trailer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black-opacity-50;
+  z-index: 1000;
+  animation: fade-in 0.3s ease-out;
+
+  @media (width <=1024px) {
+    background-color: $background-black;
+  }
+
+  &__content {
+    position: relative;
+    margin: 0 20px;
+    width: 960px;
+    height: 540px;
+    background: $background-secondary;
+    border: 1px solid $disabled;
+    animation: slide-in 0.3s ease-out;
+
+    @media (width <=1280px) {
+      margin: 0;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: -72px;
+    width: 48px;
+    height: 48px;
+    background: $primary;
+    border-radius: 24px;
+    z-index: 10;
+
+    & path {
+      fill: $black;
+      transition: 0.3s ease;
+    }
+
+    &:focus path,
+    &:hover path,
+    &:active path {
+      fill: $active;
+    }
+
+    @media (width <=1280px) {
+      top: 6px;
+      right: 6px;
+    }
+  }
+}

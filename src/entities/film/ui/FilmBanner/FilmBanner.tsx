@@ -3,7 +3,11 @@ import styles from './FilmBanner.module.scss';
 
 import { Button, Container } from '@/shared/ui';
 
-export const FilmBanner = () => {
+type FilmBannerProps = {
+  onTrailerClick?: () => void;
+};
+
+export const FilmBanner = ({ onTrailerClick }: FilmBannerProps) => {
   return (
     <section className={styles['film-banner']}>
       <Container>
@@ -26,7 +30,11 @@ export const FilmBanner = () => {
             </p>
 
             <div className={styles['film-banner__btns']}>
-              <Button theme='blue' className={styles['film-banner__trailer']}>
+              <Button
+                theme='blue'
+                className={styles['film-banner__trailer']}
+                onClick={() => onTrailerClick?.()}
+              >
                 Трейлер
               </Button>
               <button className={styles['film-banner__favourite']}>

@@ -1,9 +1,22 @@
+import { Trailer } from '@/features/films';
 import styles from './Banner.module.scss';
 
 import { Button, Container, Rating } from '@/shared/ui';
 import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Banner = () => {
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  const handleTrailerClick = () => {
+    setIsTrailerOpen(true);
+  };
+
+  const handleCloseTrailer = () => {
+    setIsTrailerOpen(false);
+  };
+
   return (
     <section className={styles.banner}>
       <Container>
@@ -23,12 +36,18 @@ export const Banner = () => {
             </p>
 
             <div className={styles.banner__btns}>
-              <Button theme='blue' className={styles.banner__trailer}>
+              <Button
+                theme='blue'
+                className={styles.banner__trailer}
+                onClick={handleTrailerClick}
+              >
                 Трейлер
               </Button>
-              <Button theme='dark' className={styles.banner__about}>
-                О фильме
-              </Button>
+              <Link to='/films/1'>
+                <Button theme='dark' className={styles.banner__about}>
+                  О фильме
+                </Button>
+              </Link>
               <button className={styles.banner__favourite}>
                 <LikeIcon />
               </button>
@@ -45,6 +64,7 @@ export const Banner = () => {
             />
           </div>
         </div>
+        <Trailer isOpen={isTrailerOpen} onClose={handleCloseTrailer} />
       </Container>
     </section>
   );

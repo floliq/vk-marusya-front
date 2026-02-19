@@ -14,3 +14,5 @@ export { PasswordIcon } from './Auth/PasswordIcon';
 export { CloseIcon } from './Auth/CloseIcon';
 export { UserIcon } from './Auth/UserIcon';
 export { BackIcon } from './BackIcon';
+export { PauseIcon } from './Player/PauseIcon';
+export { PlayIcon } from './Player/PlayIcon';
