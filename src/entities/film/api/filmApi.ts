@@ -24,7 +24,11 @@ export const filmsApi = createApi({
     getRandomFilm: builder.query<Film, void>({
       query: () => '/movie/random',
     }),
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    getTopFilms: builder.query<Film[], void>({
+      query: () => '/movie/top10',
+    }),
   }),
 });
 
-export const { useGetRandomFilmQuery } = filmsApi;
+export const { useGetRandomFilmQuery, useGetTopFilmsQuery } = filmsApi;

@@ -1,25 +1,34 @@
 import styles from './TopTen.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
-import { FilmItem } from '@/entities/film';
+import { FilmItem, useGetTopFilmsQuery } from '@/entities/film';
 
 export const TopTen = () => {
-  const films = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { data: films, isLoading } = useGetTopFilmsQuery();
 
+  console.log(films);
+
+  if (isLoading) {
+    return (
+      <section className={styles.top}>
+        <div className='container fluid'>
+          <div className={styles.top__skeleton} />
+        </div>
+      </section>
+    );
+  }
   return (
     <section className={styles.top}>
       <div className='container fluid'>
         <div className={styles.top__content}>
           <h2 className={styles.top__title}>Топ 10 фильмов</h2>
           <ul className={styles.top__films}>
-            {films.map((num) => (
-              <li key={num} className={styles.top__film}>
-                <span className={styles.top__number}>{num}</span>
+            {films?.map((film, index) => (
+              <li key={film.id} className={styles.top__film}>
+                <span className={styles.top__number}>{index + 1}</span>
                 <FilmItem
-                  id={num}
-                  image_url={
-                    'https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-                  }
+                  id={film.id}
+                  image_url={film.posterUrl ?? film.backdropUrl ?? ''}
                 />
               </li>
             ))}
@@ -42,15 +51,13 @@ export const TopTen = () => {
               1024: { slidesPerView: 'auto', enabled: false },
             }}
           >
-            {films.map((num) => (
-              <SwiperSlide key={num} className={styles.swiperSlide}>
+            {films?.map((film, index) => (
+              <SwiperSlide key={film.id} className={styles.swiperSlide}>
                 <li className={styles.top__film}>
-                  <span className={styles.top__number}>{num}</span>
+                  <span className={styles.top__number}>{index + 1}</span>
                   <FilmItem
-                    id={num}
-                    image_url={
-                      'https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
-                    }
+                    id={film.id}
+                    image_url={film.posterUrl ?? film.backdropUrl ?? ''}
                   />
                 </li>
               </SwiperSlide>
