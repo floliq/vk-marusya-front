@@ -1,0 +1,30 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { fetchApi } from '@/shared/api';
+import type { Film } from '../model/types';
+
+const baseQuery = async (endpoint: string) => {
+  try {
+    const data = await fetchApi<Film>(endpoint);
+    return { data };
+  } catch (error) {
+    return {
+      error: {
+        status: 'CUSTOM_ERROR' as const,
+        data: error instanceof Error ? error.message : 'Request failed',
+      },
+    };
+  }
+};
+
+export const filmsApi = createApi({
+  reducerPath: 'filmsApi',
+  baseQuery,
+  endpoints: (builder) => ({
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    getRandomFilm: builder.query<Film, void>({
+      query: () => '/movie/random',
+    }),
+  }),
+});
+
+export const { useGetRandomFilmQuery } = filmsApi;

@@ -6,9 +6,16 @@ import { TrailerPlayer } from '../TrailerPlayer/TrailerPlayer';
 type TrailerProps = {
   isOpen: boolean;
   onClose: () => void;
+  videoId?: string;
+  title?: string;
 };
 
-export const Trailer = ({ isOpen, onClose }: TrailerProps) => {
+export const Trailer = ({
+  isOpen,
+  onClose,
+  videoId = '',
+  title = 'Trailer',
+}: TrailerProps) => {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -31,7 +38,7 @@ export const Trailer = ({ isOpen, onClose }: TrailerProps) => {
         }}
       >
         <CloseButton onClick={onClose} className={styles.trailer__close} />
-        <TrailerPlayer src='dQw4w9WgXcQ' title='Trailer' />
+        <TrailerPlayer src={videoId} title={title} />
       </div>
     </div>
   );

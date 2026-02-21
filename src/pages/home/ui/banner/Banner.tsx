@@ -1,13 +1,21 @@
-import { Trailer } from '@/features/films';
-import styles from './Banner.module.scss';
-
-import { Button, Container, Rating } from '@/shared/ui';
-import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Trailer } from '@/features/films';
+import { useGetRandomFilmQuery } from '@/entities/film';
+import { formatRuntime } from '@/shared/lib';
+import { Button, Container, Rating } from '@/shared/ui';
+import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
+import styles from './Banner.module.scss';
+import { translateGenre } from '@/features/genres';
 
 export const Banner = () => {
+  const { data: film, isLoading, refetch } = useGetRandomFilmQuery();
+
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  const handleReload = () => {
+    void refetch();
+  };
 
   const handleTrailerClick = () => {
     setIsTrailerOpen(true);
@@ -17,33 +25,50 @@ export const Banner = () => {
     setIsTrailerOpen(false);
   };
 
+  if (isLoading) {
+    return (
+      <section className={styles.banner}>
+        <Container>
+          <div className={styles.banner__skeleton} />
+        </Container>
+      </section>
+    );
+  }
+
+  if (!film) return null;
+
+  const genre = film.genres[0] ? translateGenre(film.genres[0]) : '';
+  const backdrop = film.backdropUrl ?? film.posterUrl;
+
   return (
     <section className={styles.banner}>
       <Container>
         <div className={styles.banner__content}>
           <div className={styles.banner__left}>
             <div className={styles.banner__shorts}>
-              <Rating mark='7.5' />
-              <p className={styles.banner__short}>1979</p>
-              <p className={styles.banner__short}>детектив</p>
-              <p className={styles.banner__short}>1 ч 7 мин</p>
+              <Rating mark={film.tmdbRating} />
+              <p className={styles.banner__short}>{film.releaseYear}</p>
+              {genre && <p className={styles.banner__short}>{genre}</p>}
+              {film.runtime > 0 && (
+                <p className={styles.banner__short}>
+                  {formatRuntime(film.runtime)}
+                </p>
+              )}
             </div>
-            <h2 className={`${styles.banner__title} title`}>
-              Шерлок Холмс и доктор Ватсон: Знакомство
-            </h2>
-            <p className={styles.banner__desc}>
-              Увлекательные приключения самого известного сыщика всех времен
-            </p>
+            <h2 className={`${styles.banner__title} title`}>{film.title}</h2>
+            <p className={styles.banner__desc}>{film.plot}</p>
 
             <div className={styles.banner__btns}>
-              <Button
-                theme='blue'
-                className={styles.banner__trailer}
-                onClick={handleTrailerClick}
-              >
-                Трейлер
-              </Button>
-              <Link to='/films/1'>
+              {film.trailerYouTubeId && (
+                <Button
+                  theme='blue'
+                  className={styles.banner__trailer}
+                  onClick={handleTrailerClick}
+                >
+                  Трейлер
+                </Button>
+              )}
+              <Link to={`/films/${String(film.id)}`}>
                 <Button theme='dark' className={styles.banner__about}>
                   О фильме
                 </Button>
@@ -51,20 +76,33 @@ export const Banner = () => {
               <button className={styles.banner__favourite}>
                 <LikeIcon />
               </button>
-              <button className={styles.banner__reload}>
+              <button
+                className={styles.banner__reload}
+                onClick={handleReload}
+                disabled={isLoading}
+              >
                 <ReloadIcon />
               </button>
             </div>
           </div>
           <div className={styles.banner__right}>
-            <img
-              className={styles.banner__picture}
-              src='/banner.jpg'
-              alt='Банер'
-            />
+            {backdrop ? (
+              <img
+                className={styles.banner__picture}
+                src={backdrop}
+                alt={film.title}
+              />
+            ) : (
+              <div className={styles.banner__placeholder} />
+            )}
           </div>
         </div>
-        <Trailer isOpen={isTrailerOpen} onClose={handleCloseTrailer} />
+        <Trailer
+          isOpen={isTrailerOpen}
+          onClose={handleCloseTrailer}
+          videoId={film.trailerYouTubeId ?? undefined}
+          title={film.title}
+        />
       </Container>
     </section>
   );

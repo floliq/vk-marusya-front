@@ -35,7 +35,7 @@ export const SearchFilmListMobile = () => {
                 />
                 <div className={styles['search-film__content']}>
                   <div className={styles['search-film__shorts']}>
-                    <Rating mark='7,5' type='small' />
+                    <Rating mark={7.5} type='small' />
                     <p className={styles['search-film__short']}>1979</p>
                     <p className={styles['search-film__short']}>детектив</p>
                     <p className={styles['search-film__short']}>1 ч 7 мин</p>

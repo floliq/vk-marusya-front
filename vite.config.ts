@@ -16,6 +16,14 @@ export default defineConfig({
 
   server: {
     open: true,
+    proxy: {
+      '/api': {
+        target: 'https://cinemaguide.skillbox.cc',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 
   test: {
