@@ -2,9 +2,11 @@ import type { Action, ThunkAction } from '@reduxjs/toolkit';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { filmsApi } from '@/entities/film';
+import { genreApi } from '@/entities/genre';
 
 const rootReducer = combineReducers({
   [filmsApi.reducerPath]: filmsApi.reducer,
+  [genreApi.reducerPath]: genreApi.reducer,
 });
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
@@ -17,7 +19,10 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(filmsApi.middleware);
+      return getDefaultMiddleware().concat(
+        filmsApi.middleware,
+        genreApi.middleware
+      );
     },
     preloadedState,
   });

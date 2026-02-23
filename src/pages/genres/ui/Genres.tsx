@@ -1,30 +1,24 @@
+import { useGetGenresQuery } from '@/entities/genre';
 import styles from './Genres.module.scss';
 
 import { GenreItem } from '@/features/genres';
 
 export const Genres = () => {
-  const genresList = [
-    'history',
-    'horror',
-    'scifi',
-    'stand-up',
-    'fantasy',
-    'drama',
-    'mystery',
-    'family',
-    'comedy',
-    'romance',
-    'music',
-    'crime',
-    'tv-movie',
-    'documentary',
-    'action',
-    'thriller',
-    'western',
-    'animation',
-    'war',
-    'adventure',
-  ];
+  const { data: genresList, isLoading } = useGetGenresQuery();
+
+  if (isLoading) {
+    return (
+      <section className={styles.genres}>
+        <div className='container'>
+          <div className={styles.genres__skeleton} />
+        </div>
+      </section>
+    );
+  }
+
+  if (!genresList) {
+    return null;
+  }
 
   return (
     <section className={styles.genres}>
@@ -32,8 +26,8 @@ export const Genres = () => {
         <div className={styles.genres__content}>
           <h2 className={`${styles.genres__title} title`}>Жанры фильмов</h2>
           <ul className={styles.genres__list}>
-            {genresList.map((genre, index) => (
-              <GenreItem key={index} title={genre} />
+            {genresList.map((genre) => (
+              <GenreItem key={genre} title={genre} />
             ))}
           </ul>
         </div>
