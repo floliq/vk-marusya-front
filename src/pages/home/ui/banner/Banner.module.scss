@@ -160,15 +160,4 @@
     border-radius: 16px;
     background-color: $placeholder;
   }
-
-  &__skeleton {
-    height: 400px;
-    border-radius: 16px;
-    background-color: $placeholder;
-    animation: pulse 1.5s ease-in-out infinite;
-
-    @media (width <= 768px) {
-      height: 300px;
-    }
-  }
 }

@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui';
+import { Button, Skeleton } from '@/shared/ui';
 import styles from './FilmList.module.scss';
 import { FilmItem, type Film, useGetFilmsQuery } from '@/entities/film';
 import { useEffect, useState } from 'react';
@@ -37,9 +37,9 @@ export const FilmList = ({ genre }: FilmListProps) => {
 
   if (isLoading && page === 0 && allFilms.length === 0) {
     return (
-      <ul className={styles.films}>
-        <li className={styles.films__skeleton} />
-      </ul>
+      <div className={styles.films}>
+        <Skeleton height={800} />
+      </div>
     );
   }
 

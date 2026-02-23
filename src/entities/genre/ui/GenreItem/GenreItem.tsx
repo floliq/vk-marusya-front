@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { getGenrePicture } from '../../lib/getGenrePicture';
-import { translateGenre } from '../../lib/translateGenre';
+import { getGenrePicture } from '@/entities/genre';
+import { translateGenre } from '@/shared/lib';
 import styles from './GenreItem.module.scss';
 
 type GenreItemProps = {

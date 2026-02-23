@@ -1,4 +1,4 @@
-import { translateGenre } from '@/features/genres';
+import { translateGenre } from '@/shared/lib';
 import styles from './GenreDetail.module.scss';
 
 import { BackIcon } from '@/shared/ui/Icons';

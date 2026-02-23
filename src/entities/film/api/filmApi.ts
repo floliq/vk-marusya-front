@@ -32,8 +32,15 @@ export const filmsApi = createApi({
       query: (params) =>
         `/movie?${new URLSearchParams(params as Record<string, string>).toString()}`,
     }),
+    getFilmById: builder.query<Film, number>({
+      query: (id) => `/movie/${id}`,
+    }),
   }),
 });
 
-export const { useGetRandomFilmQuery, useGetTopFilmsQuery, useGetFilmsQuery } =
-  filmsApi;
+export const {
+  useGetRandomFilmQuery,
+  useGetTopFilmsQuery,
+  useGetFilmsQuery,
+  useGetFilmByIdQuery,
+} = filmsApi;

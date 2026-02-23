@@ -6,5 +6,6 @@ export {
   useGetRandomFilmQuery,
   useGetFilmsQuery,
   useGetTopFilmsQuery,
+  useGetFilmByIdQuery,
 } from './api/filmApi';
 export type { Film } from './model/types';

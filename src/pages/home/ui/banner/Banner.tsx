@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trailer } from '@/features/films';
 import { useGetRandomFilmQuery } from '@/entities/film';
-import { formatRuntime } from '@/shared/lib';
-import { Button, Container, Rating } from '@/shared/ui';
+import { Button, Container, Rating, Skeleton } from '@/shared/ui';
 import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
 import styles from './Banner.module.scss';
-import { translateGenre } from '@/features/genres';
+import { formatRuntime, translateGenre } from '@/shared/lib';
 
 export const Banner = () => {
   const { data: film, isLoading, refetch } = useGetRandomFilmQuery();
@@ -29,7 +28,7 @@ export const Banner = () => {
     return (
       <section className={styles.banner}>
         <Container>
-          <div className={styles.banner__skeleton} />
+          <Skeleton height={400} />
         </Container>
       </section>
     );

@@ -1,0 +1,22 @@
+@use '@styles/variables' as *;
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton {
+  border-radius: 16px;
+  background-color: $placeholder;
+  animation: pulse 1.5s ease-in-out infinite;
+
+  @media (width <= 540px) {
+    height: 300px;
+  }
+}

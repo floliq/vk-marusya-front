@@ -1,7 +1,7 @@
-import { useGetGenresQuery } from '@/entities/genre';
+import { useGetGenresQuery, GenreItem } from '@/entities/genre';
 import styles from './Genres.module.scss';
 
-import { GenreItem } from '@/features/genres';
+import { Skeleton } from '@/shared/ui';
 
 export const Genres = () => {
   const { data: genresList, isLoading } = useGetGenresQuery();
@@ -10,7 +10,7 @@ export const Genres = () => {
     return (
       <section className={styles.genres}>
         <div className='container'>
-          <div className={styles.genres__skeleton} />
+          <Skeleton height={800} />
         </div>
       </section>
     );

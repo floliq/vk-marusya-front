@@ -2,6 +2,7 @@ import styles from './TopTen.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
 import { FilmItem, useGetTopFilmsQuery } from '@/entities/film';
+import { Skeleton } from '@/shared/ui';
 
 export const TopTen = () => {
   const { data: films, isLoading } = useGetTopFilmsQuery();
@@ -10,7 +11,7 @@ export const TopTen = () => {
     return (
       <section className={styles.top}>
         <div className='container fluid'>
-          <div className={styles.top__skeleton} />
+          <Skeleton height={800} />
         </div>
       </section>
     );

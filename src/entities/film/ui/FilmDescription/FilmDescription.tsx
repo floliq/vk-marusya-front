@@ -1,6 +1,10 @@
+import type { Film } from '../../model/types';
 import styles from './FilmDescription.module.scss';
 
-export const FilmDescription = () => {
+type FilmDescriptionProps = {
+  film: Film;
+};
+export const FilmDescription = ({ film }: FilmDescriptionProps) => {
   return (
     <section className={styles['film-desc']}>
       <div className='container'>
@@ -15,7 +19,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                Русский
+                {film.language ? film.language : 'Неизвестно'}
               </span>
             </li>
             <li className={styles['film-desc__item']}>
@@ -26,7 +30,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                250 000 руб.
+                {film.budget ?? 'Неизвестно'}
               </span>
             </li>
             <li className={styles['film-desc__item']}>
@@ -37,7 +41,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                2 835 000 руб.
+                {film.revenue ?? 'Неизвестно'}
               </span>
             </li>
             <li className={styles['film-desc__item']}>
@@ -48,7 +52,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                Игорь Масленников
+                {film.director ?? 'Неизвестно'}
               </span>
             </li>
             <li className={styles['film-desc__item']}>
@@ -59,7 +63,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                Ленфильм
+                {film.production ?? 'Неизвестно'}
               </span>
             </li>
             <li className={styles['film-desc__item']}>
@@ -70,7 +74,7 @@ export const FilmDescription = () => {
                 <span className={styles['film-desc__dots']}></span>
               </div>
               <span className={`${styles['film-desc__info']} text`}>
-                Топ-250, 33 место
+                {film.awardsSummary ?? 'Неизвестно'}
               </span>
             </li>
           </ul>
