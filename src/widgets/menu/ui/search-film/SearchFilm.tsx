@@ -3,10 +3,16 @@ import styles from './SearchFilm.module.scss';
 import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { SearchFilmList } from '../search-film-list/SearchFilmList';
+import { useGetFilmsQuery } from '@/entities/film';
 
-export const SearchFilm = () => {
+type SearchFilmProps = {
+  onSuccess?: () => void;
+};
+
+export const SearchFilm = ({ onSuccess }: SearchFilmProps) => {
   const [value, setValue] = useState('');
   const [debounceValue, setDebounceValue] = useState('');
+  const { data: films } = useGetFilmsQuery({ title: debounceValue });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,6 +30,8 @@ export const SearchFilm = () => {
 
   const handleCloseClick = () => {
     setValue('');
+    setDebounceValue('');
+    onSuccess?.();
   };
 
   return (
@@ -40,7 +48,12 @@ export const SearchFilm = () => {
           <CloseIcon />
         </button>
       )}
-      {debounceValue && <SearchFilmList />}
+      {debounceValue && (
+        <SearchFilmList
+          films={films ?? []}
+          onSuccess={onSuccess ?? handleCloseClick}
+        />
+      )}
     </div>
   );
 };

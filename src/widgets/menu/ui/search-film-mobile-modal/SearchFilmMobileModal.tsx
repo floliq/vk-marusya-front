@@ -20,7 +20,7 @@ export const SearchFilmMobileModal = ({
           e.stopPropagation();
         }}
       >
-        <SearchFilm />
+        <SearchFilm onSuccess={onClose} />
       </div>
     </div>
   );
