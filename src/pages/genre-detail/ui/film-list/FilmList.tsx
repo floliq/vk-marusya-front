@@ -1,25 +1,71 @@
 import { Button } from '@/shared/ui';
 import styles from './FilmList.module.scss';
-import { FilmItem } from '@/entities/film';
+import { FilmItem, type Film, useGetFilmsQuery } from '@/entities/film';
+import { useEffect, useState } from 'react';
 
-export const FilmList = () => {
-  const films = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+type FilmListProps = {
+  genre: string;
+};
+
+export const FilmList = ({ genre }: FilmListProps) => {
+  const [page, setPage] = useState(0);
+  const [allFilms, setAllFilms] = useState<Film[]>([]);
+  const { data: films, isLoading } = useGetFilmsQuery({
+    genre,
+    count: 15,
+    page,
+  });
+
+  useEffect(() => {
+    setPage(0);
+    setAllFilms([]);
+  }, [genre]);
+
+  useEffect(() => {
+    if (!isLoading && films && films.length > 0) {
+      if (page === 0) {
+        setAllFilms(films);
+      } else {
+        setAllFilms((prev) => [
+          ...prev,
+          ...films.filter((f) => !prev.find((p) => p.id === f.id)),
+        ]);
+      }
+    }
+    // eslint-disable-next-line
+  }, [films, isLoading]);
+
+  if (isLoading && page === 0 && allFilms.length === 0) {
+    return (
+      <ul className={styles.films}>
+        <li className={styles.films__skeleton} />
+      </ul>
+    );
+  }
 
   return (
     <>
       <ul className={styles.films}>
-        {films.map((num) => (
-          <li key={num} className={styles.films__item}>
+        {allFilms.map((film) => (
+          <li key={film.id} className={styles.films__item}>
             <FilmItem
-              id={num}
-              image_url='https://cinemaguide.skillbox.cc/images/1045770/9jlGTo6GiHeri1lx2czChvLzTO3.jpg'
+              id={film.id}
+              image_url={film.posterUrl ?? film.backdropUrl ?? ''}
             />
           </li>
         ))}
       </ul>
-      <Button theme='blue' className={styles.films__more}>
-        Показать еще
-      </Button>
+      {allFilms.length > 0 && (
+        <Button
+          theme='blue'
+          className={styles.films__more}
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        >
+          Показать еще
+        </Button>
+      )}
     </>
   );
 };

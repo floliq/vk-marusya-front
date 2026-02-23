@@ -26,3 +26,10 @@ export type Film = {
   production: string | null;
   awardsSummary: string | null;
 };
+
+export type FilmsResponseParams = {
+  count?: number;
+  page?: number;
+  genre?: string;
+  title?: string;
+};

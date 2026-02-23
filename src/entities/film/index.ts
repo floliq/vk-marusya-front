@@ -4,6 +4,7 @@ export { FilmItem } from './ui/FilmItem/FilmItem';
 export {
   filmsApi,
   useGetRandomFilmQuery,
+  useGetFilmsQuery,
   useGetTopFilmsQuery,
 } from './api/filmApi';
 export type { Film } from './model/types';

@@ -6,8 +6,6 @@ import { FilmItem, useGetTopFilmsQuery } from '@/entities/film';
 export const TopTen = () => {
   const { data: films, isLoading } = useGetTopFilmsQuery();
 
-  console.log(films);
-
   if (isLoading) {
     return (
       <section className={styles.top}>

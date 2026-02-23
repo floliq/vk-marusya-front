@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { fetchApi } from '@/shared/api';
-import type { Film } from '../model/types';
+import type { Film, FilmsResponseParams } from '../model/types';
 
 const baseQuery = async (endpoint: string) => {
   try {
@@ -28,7 +28,12 @@ export const filmsApi = createApi({
     getTopFilms: builder.query<Film[], void>({
       query: () => '/movie/top10',
     }),
+    getFilms: builder.query<Film[], FilmsResponseParams>({
+      query: (params) =>
+        `/movie?${new URLSearchParams(params as Record<string, string>).toString()}`,
+    }),
   }),
 });
 
-export const { useGetRandomFilmQuery, useGetTopFilmsQuery } = filmsApi;
+export const { useGetRandomFilmQuery, useGetTopFilmsQuery, useGetFilmsQuery } =
+  filmsApi;

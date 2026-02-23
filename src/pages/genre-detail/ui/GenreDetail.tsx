@@ -19,7 +19,7 @@ export const GenreDetail = () => {
             </Link>{' '}
             {translatedGenre}
           </h2>
-          <FilmList />
+          <FilmList genre={genre ?? ''} />
         </div>
       </div>
     </section>
