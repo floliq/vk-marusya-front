@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styles from './Trailer.module.scss';
-import { CloseButton } from '@/shared/ui';
-import { TrailerPlayer } from '../TrailerPlayer/TrailerPlayer';
+import { CloseButton, TrailerPlayer } from '@/shared/ui';
 
 type TrailerProps = {
   isOpen: boolean;

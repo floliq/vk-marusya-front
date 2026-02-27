@@ -2,9 +2,16 @@ import styles from './AuthForm.module.scss';
 import { useState } from 'react';
 import { LoginForm } from './login-form/LoginForm';
 import { RegisterForm } from './register-form/RegisterForm';
+import { SuccessForm } from './success-form/SuccessForm';
 
 export const AuthForm = () => {
   const [authState, setAuthState] = useState<'login' | 'register'>('login');
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const onSuccessClickHandler = () => {
+    setIsSuccess(false);
+    setAuthState('login');
+  };
 
   return (
     <div className={styles.auth}>
@@ -14,18 +21,25 @@ export const AuthForm = () => {
           alt='Логотип компании'
           className={styles.auth__logo}
         />
-        {authState === 'login' ? (
-          <LoginForm
-            onSwitchToRegister={() => {
-              setAuthState('register');
-            }}
-          />
+        {!isSuccess ? (
+          authState === 'login' ? (
+            <LoginForm
+              onSwitchToRegister={() => {
+                setAuthState('register');
+              }}
+            />
+          ) : (
+            <RegisterForm
+              onSwitchToLogin={() => {
+                setAuthState('login');
+              }}
+              onSuccessClickHandler={() => {
+                setIsSuccess(true);
+              }}
+            />
+          )
         ) : (
-          <RegisterForm
-            onSwitchToLogin={() => {
-              setAuthState('login');
-            }}
-          />
+          <SuccessForm onSuccessClickHandler={onSuccessClickHandler} />
         )}
       </div>
     </div>

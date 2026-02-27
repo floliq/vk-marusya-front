@@ -8,7 +8,7 @@ import { SearchFilm } from './search-film/SearchFilm';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [isAuth] = useState(true);
+  const [isAuth] = useState(false);
 
   return (
     <header className={styles.menu}>

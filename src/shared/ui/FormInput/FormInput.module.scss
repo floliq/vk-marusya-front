@@ -60,4 +60,12 @@
       }
     }
   }
+
+  &__error {
+    border-color: $icon-error;
+
+    & + .input__icon path {
+      fill: $icon-error;
+    }
+  }
 }
