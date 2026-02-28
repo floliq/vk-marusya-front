@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, FormInput } from '@/shared/ui';
 import styles from './RegisterForm.module.scss';
 import { EmailIcon, PasswordIcon, UserIcon } from '@/shared/ui/Icons';
@@ -16,6 +17,7 @@ export const RegisterForm = ({
   onSuccessClickHandler,
 }: RegisterFormProps) => {
   const [registerMutation] = useRegisterMutation();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -38,11 +40,12 @@ export const RegisterForm = ({
       setError('confirmPassword', { message: 'Пароли не совпадают' });
       return;
     }
+    setSubmitError(null);
     try {
       const response = await registerMutation(data).unwrap();
       if (response.success) onSuccessClickHandler();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      setSubmitError('Произошла ошибка. Попробуйте позже.');
     }
   };
 
@@ -94,6 +97,11 @@ export const RegisterForm = ({
           register={register}
           error={errors.confirmPassword?.message}
         />
+        {submitError && (
+          <p className={styles.register__error} role='alert'>
+            {submitError}
+          </p>
+        )}
         <Button theme='blue' className={styles.register__btn} type='submit'>
           Создать аккаунт
         </Button>

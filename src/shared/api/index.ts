@@ -1,1 +1,1 @@
-export { fetchApi } from './fetchApi.ts';
+export { fetchApi } from './fetchApi';

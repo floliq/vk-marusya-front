@@ -36,7 +36,11 @@ export const Trailer = ({
           e.stopPropagation();
         }}
       >
-        <CloseButton onClick={onClose} className={styles.trailer__close} />
+        <CloseButton
+          onClick={onClose}
+          className={styles.trailer__close}
+          aria-label='Закрыть трейлер'
+        />
         <TrailerPlayer src={videoId} title={title} />
       </div>
     </div>

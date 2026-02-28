@@ -54,9 +54,13 @@ export const FilmBanner = ({
                 Трейлер
               </Button>
               <button
+                type='button'
                 className={`${styles['film-banner__favourite']} ${isLiked ? styles['film-banner__favourite-liked'] : ''}`}
                 onClick={handleFavouriteClick}
                 disabled={isFavouriteLoading}
+                aria-label={
+                  isLiked ? 'Удалить из избранного' : 'Добавить в избранное'
+                }
               >
                 <LikeIcon filled={isLiked} />
               </button>

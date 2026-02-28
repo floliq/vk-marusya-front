@@ -1,27 +1,22 @@
-# vite-template-redux
+# VK MARUSYA FRONTEND
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+До запуска приложения:
 
-```sh
-npx tiged reduxjs/redux-templates/packages/vite-template-redux my-app
+1. Создайте файл .env в корне проекта и укажите переменную VITE_API_URL
+
+```
+VITE_API_URL=https://cinemaguide.skillbox.cc
 ```
 
-## Goals
+Для запуска приложения в режиме разработки
 
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+1. Установите зависимости командой `npm install`
+2. Запустите приложение командой `npm run dev`
 
-## Scripts
+Для сборки приложения для деплоя
 
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
-
-## Inspiration
-
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)
+1. Установите зависимости командой `npm install`
+2. Скомпилируйте приложение командой `npm run build`
+3. Установить serve `npm install -g serve`
+4. Перейти в папку `dist` `cd dist`
+5. Запустите приложение командой `serve`

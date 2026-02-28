@@ -12,7 +12,7 @@ export const FilmList = ({ genre }: FilmListProps) => {
   const [allFilms, setAllFilms] = useState<Film[]>([]);
   const { data: films, isLoading } = useGetFilmsQuery({
     genre,
-    count: 15,
+    count: 10,
     page,
   });
 
@@ -32,8 +32,7 @@ export const FilmList = ({ genre }: FilmListProps) => {
         ]);
       }
     }
-    // eslint-disable-next-line
-  }, [films, isLoading]);
+  }, [films, isLoading, page]);
 
   if (isLoading && page === 0 && allFilms.length === 0) {
     return (
@@ -50,7 +49,7 @@ export const FilmList = ({ genre }: FilmListProps) => {
           <li key={film.id} className={styles.films__item}>
             <FilmItem
               id={film.id}
-              image_url={film.posterUrl ?? film.backdropUrl ?? ''}
+              imageUrl={film.posterUrl ?? film.backdropUrl ?? ''}
             />
           </li>
         ))}

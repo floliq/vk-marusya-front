@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { loginSchema } from '@/entities/session';
 import styles from './LoginForm.module.scss';
 import { Button, FormInput } from '@/shared/ui';
@@ -17,6 +18,7 @@ export const LoginForm = ({
   onSuccess,
 }: LoginFormProps) => {
   const { login } = useAuth();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -31,11 +33,16 @@ export const LoginForm = ({
   });
 
   const onSubmit = async (data: LoginFormData) => {
+    setSubmitError(null);
     try {
-      await login(data.email, data.password);
-      onSuccess();
-    } catch (error) {
-      console.error(error);
+      const response = await login(data.email, data.password);
+      if (response.success) {
+        onSuccess();
+      } else {
+        setSubmitError('Не удалось войти. Проверьте email и пароль.');
+      }
+    } catch {
+      setSubmitError('Произошла ошибка. Попробуйте позже.');
     }
   };
 
@@ -59,6 +66,11 @@ export const LoginForm = ({
           register={register}
           error={errors.password?.message}
         />
+        {submitError && (
+          <p className={styles.login__error} role='alert'>
+            {submitError}
+          </p>
+        )}
         <Button theme='blue' className={styles.login__btn} type='submit'>
           Войти
         </Button>

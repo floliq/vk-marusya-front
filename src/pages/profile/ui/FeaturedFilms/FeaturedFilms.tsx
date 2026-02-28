@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CloseButton, Skeleton } from '@/shared/ui';
 import styles from './FeaturedFilms.module.scss';
 
@@ -5,13 +6,11 @@ import { FilmItem } from '@/entities/film';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // eslint-disable-next-line no-restricted-imports
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import {
   selectFavorites,
   setFavorites,
   useGetFavouritesQuery,
   useRemoveFavouriteMutation,
-  type FavouriteFilm,
 } from '@/entities/session';
 
 export const FeaturedFilms = () => {
@@ -19,20 +18,18 @@ export const FeaturedFilms = () => {
   const { data: films = [], isLoading } = useGetFavouritesQuery();
   const [removeFavouriteMutation] = useRemoveFavouriteMutation();
   const favourites = useSelector(selectFavorites);
-  const [filmsState, setFilmsState] = useState<FavouriteFilm[]>([]);
-
-  useEffect(() => {
-    if (films.length > 0) {
-      setFilmsState(films);
-    } else {
-      setFilmsState([]);
-    }
-  }, [films]);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const handleDeleteClick = async (filmId: number) => {
-    await removeFavouriteMutation(filmId).unwrap();
-    dispatch(setFavorites(favourites.filter((id) => id !== String(filmId))));
-    setFilmsState(filmsState.filter((film) => film.id !== filmId));
+    setDeleteError(null);
+    try {
+      await removeFavouriteMutation(filmId).unwrap();
+      dispatch(setFavorites(favourites.filter((id) => id !== String(filmId))));
+    } catch {
+      setDeleteError(
+        'Не удалось удалить фильм из избранного. Попробуйте позже.'
+      );
+    }
   };
 
   if (isLoading) {
@@ -53,17 +50,23 @@ export const FeaturedFilms = () => {
 
   return (
     <>
+      {deleteError && (
+        <p className={styles.featured__error} role='alert'>
+          {deleteError}
+        </p>
+      )}
       <div className={styles.featured}>
         <ul className={styles.featured__list}>
-          {filmsState.map((film) => (
+          {films.map((film) => (
             <li key={film.id} className={styles.featured__item}>
               <CloseButton
                 onClick={() => void handleDeleteClick(film.id)}
                 className={styles.featured__close}
+                aria-label='Удалить из избранного'
               />
               <FilmItem
                 id={film.id}
-                image_url={film.posterUrl ?? film.backdropUrl ?? ''}
+                imageUrl={film.posterUrl ?? film.backdropUrl ?? ''}
               />
             </li>
           ))}
@@ -84,16 +87,17 @@ export const FeaturedFilms = () => {
             1024: { slidesPerView: 'auto', enabled: false },
           }}
         >
-          {filmsState.map((film) => (
+          {films.map((film) => (
             <SwiperSlide key={film.id} className={styles.swiperSlide}>
               <li key={film.id} className={styles.featured__item}>
                 <CloseButton
                   onClick={() => void handleDeleteClick(film.id)}
                   className={styles.featured__close}
+                  aria-label='Удалить из избранного'
                 />
                 <FilmItem
                   id={film.id}
-                  image_url={film.posterUrl ?? film.backdropUrl ?? ''}
+                  imageUrl={film.posterUrl ?? film.backdropUrl ?? ''}
                 />
               </li>
             </SwiperSlide>

@@ -5,7 +5,7 @@ import type { SessionResult, Profile } from '../model/types';
 export const sessionApi = createApi({
   reducerPath: 'sessionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
+    baseUrl: import.meta.env.VITE_API_URL ?? '/api',
     credentials: 'include',
   }),
   tagTypes: ['Profile'],

@@ -5,7 +5,7 @@ import type { SessionResult } from '../model/types';
 export const favouritesApi = createApi({
   reducerPath: 'favouritesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
+    baseUrl: import.meta.env.VITE_API_URL ?? '/api',
     credentials: 'include',
   }),
   tagTypes: ['Favourites'],

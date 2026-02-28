@@ -3,6 +3,12 @@
 .featured {
   display: flex;
 
+  &__error {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: $red;
+  }
+
   @media (width <= 1024px) {
     display: none;
   }

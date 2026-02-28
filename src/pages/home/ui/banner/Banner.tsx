@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trailer } from '@/features/films';
 import { useGetRandomFilmQuery } from '@/entities/film';
@@ -7,35 +7,23 @@ import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
 import styles from './Banner.module.scss';
 import { formatRuntime, translateGenre } from '@/shared/lib';
 import { useAuth, AuthForm } from '@/features/auth';
+import { useFavouriteAction } from '@/features/favourites';
 import { Modal } from '@/shared/ui';
-import {
-  useAddFavouriteMutation,
-  useRemoveFavouriteMutation,
-  setFavorites,
-} from '@/entities/session';
-/* eslint-disable no-restricted-imports -- FSD: pages не импортируют из app, используем react-redux */
-import { useDispatch } from 'react-redux';
 
 export const Banner = () => {
-  const dispatch = useDispatch();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const { data: film, isLoading, refetch } = useGetRandomFilmQuery();
   const { isAuth, favourites } = useAuth();
-  const [addFavouriteMutation] = useAddFavouriteMutation();
-  const [removeFavouriteMutation] = useRemoveFavouriteMutation();
-  const [isFavouriteLoading, setIsFavouriteLoading] = useState(false);
-  const [isLiked, setIsLiked] = useState(() =>
-    favourites.includes(String(film?.id))
-  );
 
-  useEffect(() => {
-    if (favourites.length > 0) {
-      setIsLiked(favourites.includes(String(film?.id)));
-    } else {
-      setIsLiked(false);
-    }
-  }, [favourites, film?.id]);
+  const { handleFavouriteClick, isFavouriteLoading, isLiked } =
+    useFavouriteAction(film?.id, {
+      isAuth,
+      favourites,
+      onAuthRequired: () => {
+        setIsAuthOpen(true);
+      },
+    });
 
   const handleReload = () => {
     void refetch();
@@ -47,28 +35,6 @@ export const Banner = () => {
 
   const handleCloseTrailer = () => {
     setIsTrailerOpen(false);
-  };
-
-  const handleFavouriteClick = async () => {
-    if (!film || isFavouriteLoading) return;
-    if (!isAuth) {
-      setIsAuthOpen(true);
-    } else {
-      setIsFavouriteLoading(true);
-      try {
-        if (isLiked) {
-          await removeFavouriteMutation(film.id).unwrap();
-          dispatch(
-            setFavorites(favourites.filter((id) => id !== String(film.id)))
-          );
-        } else {
-          await addFavouriteMutation(film.id).unwrap();
-          dispatch(setFavorites([...favourites, String(film.id)]));
-        }
-      } finally {
-        setIsFavouriteLoading(false);
-      }
-    }
   };
 
   if (isLoading) {
@@ -120,16 +86,22 @@ export const Banner = () => {
                 </Button>
               </Link>
               <button
+                type='button'
                 className={`${styles.banner__favourite} ${isLiked ? styles['banner__favourite-liked'] : ''}`}
                 onClick={() => void handleFavouriteClick()}
                 disabled={isFavouriteLoading}
+                aria-label={
+                  isLiked ? 'Удалить из избранного' : 'Добавить в избранное'
+                }
               >
                 <LikeIcon filled={isLiked} />
               </button>
               <button
+                type='button'
                 className={styles.banner__reload}
                 onClick={handleReload}
                 disabled={isLoading}
+                aria-label='Обновить'
               >
                 <ReloadIcon />
               </button>

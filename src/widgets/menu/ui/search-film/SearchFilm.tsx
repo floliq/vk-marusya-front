@@ -12,7 +12,10 @@ type SearchFilmProps = {
 export const SearchFilm = ({ onSuccess }: SearchFilmProps) => {
   const [value, setValue] = useState('');
   const [debounceValue, setDebounceValue] = useState('');
-  const { data: films } = useGetFilmsQuery({ title: debounceValue });
+  const { data: films } = useGetFilmsQuery(
+    { title: debounceValue },
+    { skip: !debounceValue.trim() }
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,7 +47,12 @@ export const SearchFilm = ({ onSuccess }: SearchFilmProps) => {
         onChange={onChange}
       />
       {value && (
-        <button className={styles.search__close} onClick={handleCloseClick}>
+        <button
+          type='button'
+          className={styles.search__close}
+          onClick={handleCloseClick}
+          aria-label='Очистить поиск'
+        >
           <CloseIcon />
         </button>
       )}

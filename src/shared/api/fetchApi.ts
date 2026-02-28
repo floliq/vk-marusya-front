@@ -1,10 +1,10 @@
-const BASE_URL = '/api';
+const getApiBaseUrl = () => import.meta.env.VITE_API_URL ?? '/api';
 
 export const fetchApi = async <T>(
   endpoint: string,
   options?: RequestInit
 ): Promise<T> => {
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${getApiBaseUrl()}${endpoint}`, {
     credentials: 'include',
     ...options,
   });

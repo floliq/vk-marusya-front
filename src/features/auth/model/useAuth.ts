@@ -18,6 +18,7 @@ import {
   setFavorites,
   setEmail,
   setSurname,
+  sessionApi,
 } from '@/entities/session';
 
 export const useAuth = () => {
@@ -91,6 +92,7 @@ export const useAuth = () => {
       dispatch(setFavorites([]));
     }
     dispatch(logoutAction());
+    dispatch(sessionApi.util.resetApiState());
   }, [dispatch, logoutMutation]);
 
   const checkAuth = useCallback(async (): Promise<boolean> => {

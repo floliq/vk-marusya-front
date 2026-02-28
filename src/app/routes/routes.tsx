@@ -5,6 +5,7 @@ import { Genres } from '@/pages/genres';
 import { Home } from '@/pages/home';
 import { Layout } from '../Layout';
 import { Profile } from '@/pages/profile';
+import { RequireAuth } from '@/features/auth';
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +44,9 @@ export const router = createBrowserRouter([
     path: '/profile',
     element: (
       <Layout>
-        <Profile />
+        <RequireAuth>
+          <Profile />
+        </RequireAuth>
       </Layout>
     ),
   },

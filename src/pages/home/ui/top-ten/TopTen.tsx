@@ -37,7 +37,7 @@ export const TopTen = () => {
                 <span className={styles.top__number}>{index + 1}</span>
                 <FilmItem
                   id={film.id}
-                  image_url={film.posterUrl ?? film.backdropUrl ?? ''}
+                  imageUrl={film.posterUrl ?? film.backdropUrl ?? ''}
                 />
               </li>
             ))}
@@ -56,7 +56,7 @@ export const TopTen = () => {
             breakpoints={{
               320: { slidesPerView: 1.2 },
               480: { slidesPerView: 2.2 },
-              768: { slidesPerView: 3.2 },
+              768: { slidesPerView: 2.5 },
               1024: { slidesPerView: 'auto', enabled: false },
             }}
           >
@@ -66,7 +66,7 @@ export const TopTen = () => {
                   <span className={styles.top__number}>{index + 1}</span>
                   <FilmItem
                     id={film.id}
-                    image_url={film.posterUrl ?? film.backdropUrl ?? ''}
+                    imageUrl={film.posterUrl ?? film.backdropUrl ?? ''}
                   />
                 </li>
               </SwiperSlide>

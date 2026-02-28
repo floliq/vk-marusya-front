@@ -47,10 +47,12 @@ export const Menu = () => {
 
           {!isAuth ? (
             <button
+              type='button'
               className={styles.menu__link}
               onClick={() => {
                 setIsAuthOpen(true);
               }}
+              aria-label='Войти в аккаунт'
             >
               Войти
             </button>
