@@ -131,10 +131,23 @@
       background-color: $black-disabled;
       color: $disabled;
     }
+
+    &-liked {
+      svg {
+        color: $active;
+      }
+    }
   }
 
   &__picture {
     width: 100%;
     border-radius: 16px;
+  }
+
+  &__placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    background-color: $placeholder;
   }
 }

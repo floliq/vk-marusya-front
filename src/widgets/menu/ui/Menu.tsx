@@ -3,9 +3,8 @@ import styles from './Menu.module.scss';
 import { Container, Modal } from '@/shared/ui';
 import { MobileMenu } from './mobile-menu/MobileMenu';
 import { useState } from 'react';
-import { AuthForm } from './auth-form/AuthForm';
+import { useAuth, AuthForm } from '@/features/auth';
 import { SearchFilm } from './search-film/SearchFilm';
-import { useAuth } from '@/widgets/menu';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);

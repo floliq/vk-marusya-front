@@ -5,7 +5,7 @@ import { EmailIcon, PasswordIcon } from '@/shared/ui/Icons';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { LoginFormData } from '@/entities/session';
-import { useAuth } from '@/widgets/menu';
+import { useAuth } from '@/features/auth';
 
 type LoginFormProps = {
   onSwitchToRegister: () => void;

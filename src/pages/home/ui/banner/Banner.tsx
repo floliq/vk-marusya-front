@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trailer } from '@/features/films';
 import { useGetRandomFilmQuery } from '@/entities/film';
@@ -6,11 +6,36 @@ import { Button, Container, Rating, Skeleton } from '@/shared/ui';
 import { LikeIcon, ReloadIcon } from '@/shared/ui/Icons';
 import styles from './Banner.module.scss';
 import { formatRuntime, translateGenre } from '@/shared/lib';
+import { useAuth, AuthForm } from '@/features/auth';
+import { Modal } from '@/shared/ui';
+import {
+  useAddFavouriteMutation,
+  useRemoveFavouriteMutation,
+  setFavorites,
+} from '@/entities/session';
+/* eslint-disable no-restricted-imports -- FSD: pages не импортируют из app, используем react-redux */
+import { useDispatch } from 'react-redux';
 
 export const Banner = () => {
-  const { data: film, isLoading, refetch } = useGetRandomFilmQuery();
-
+  const dispatch = useDispatch();
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const { data: film, isLoading, refetch } = useGetRandomFilmQuery();
+  const { isAuth, favourites } = useAuth();
+  const [addFavouriteMutation] = useAddFavouriteMutation();
+  const [removeFavouriteMutation] = useRemoveFavouriteMutation();
+  const [isFavouriteLoading, setIsFavouriteLoading] = useState(false);
+  const [isLiked, setIsLiked] = useState(() =>
+    favourites.includes(String(film?.id))
+  );
+
+  useEffect(() => {
+    if (favourites.length > 0) {
+      setIsLiked(favourites.includes(String(film?.id)));
+    } else {
+      setIsLiked(false);
+    }
+  }, [favourites, film?.id]);
 
   const handleReload = () => {
     void refetch();
@@ -22,6 +47,28 @@ export const Banner = () => {
 
   const handleCloseTrailer = () => {
     setIsTrailerOpen(false);
+  };
+
+  const handleFavouriteClick = async () => {
+    if (!film || isFavouriteLoading) return;
+    if (!isAuth) {
+      setIsAuthOpen(true);
+    } else {
+      setIsFavouriteLoading(true);
+      try {
+        if (isLiked) {
+          await removeFavouriteMutation(film.id).unwrap();
+          dispatch(
+            setFavorites(favourites.filter((id) => id !== String(film.id)))
+          );
+        } else {
+          await addFavouriteMutation(film.id).unwrap();
+          dispatch(setFavorites([...favourites, String(film.id)]));
+        }
+      } finally {
+        setIsFavouriteLoading(false);
+      }
+    }
   };
 
   if (isLoading) {
@@ -72,8 +119,12 @@ export const Banner = () => {
                   О фильме
                 </Button>
               </Link>
-              <button className={styles.banner__favourite}>
-                <LikeIcon />
+              <button
+                className={`${styles.banner__favourite} ${isLiked ? styles['banner__favourite-liked'] : ''}`}
+                onClick={() => void handleFavouriteClick()}
+                disabled={isFavouriteLoading}
+              >
+                <LikeIcon filled={isLiked} />
               </button>
               <button
                 className={styles.banner__reload}
@@ -103,6 +154,18 @@ export const Banner = () => {
           title={film.title}
         />
       </Container>
+      <Modal
+        isOpen={isAuthOpen}
+        onClose={() => {
+          setIsAuthOpen(false);
+        }}
+      >
+        <AuthForm
+          onSuccess={() => {
+            setIsAuthOpen(false);
+          }}
+        />
+      </Modal>
     </section>
   );
 };

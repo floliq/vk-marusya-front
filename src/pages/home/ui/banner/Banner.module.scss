@@ -123,6 +123,12 @@
       background-color: $black-disabled;
       color: $disabled;
     }
+
+    &-liked {
+      svg {
+        color: $active;
+      }
+    }
   }
 
   &__reload {

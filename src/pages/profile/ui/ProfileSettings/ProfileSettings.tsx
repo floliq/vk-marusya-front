@@ -2,7 +2,7 @@ import { Button } from '@/shared/ui';
 import styles from './ProfileSettings.module.scss';
 
 import { EmailIcon } from '@/shared/ui/Icons';
-import { useAuth } from '@/widgets/menu';
+import { useAuth } from '@/features/auth';
 import { useNavigate } from 'react-router-dom';
 
 export const ProfileSettings = () => {

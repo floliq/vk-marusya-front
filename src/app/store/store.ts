@@ -3,12 +3,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { filmsApi } from '@/entities/film';
 import { genreApi } from '@/entities/genre';
-import { sessionApi, sessionReducer } from '@/entities/session';
+import { sessionApi, sessionReducer, favouritesApi } from '@/entities/session';
 
 const rootReducer = combineReducers({
   [filmsApi.reducerPath]: filmsApi.reducer,
   [genreApi.reducerPath]: genreApi.reducer,
   [sessionApi.reducerPath]: sessionApi.reducer,
+  [favouritesApi.reducerPath]: favouritesApi.reducer,
   session: sessionReducer,
 });
 // Infer the `RootState` type from the root reducer
@@ -25,7 +26,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
       return getDefaultMiddleware().concat(
         filmsApi.middleware,
         genreApi.middleware,
-        sessionApi.middleware
+        sessionApi.middleware,
+        favouritesApi.middleware
       );
     },
     preloadedState,

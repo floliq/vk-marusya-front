@@ -4,22 +4,29 @@ export {
   useRegisterMutation,
   useLoginMutation,
   useGetProfileQuery,
-  useLogoutQuery,
+  useLogoutMutation,
 } from './api/sessionApi';
 export { sessionApi } from './api/sessionApi';
+export {
+  favouritesApi,
+  useAddFavouriteMutation,
+  useRemoveFavouriteMutation,
+} from './api/favoiritesApi';
 export { loginSchema } from './model/schemas';
 export type { LoginFormData } from './model/types';
 export {
   selectIsAuth,
+  selectIsAuthChecking,
   selectName,
   selectSurname,
   selectEmail,
-  selectFavourites,
+  selectFavorites,
   setIsAuth,
+  setIsAuthChecking,
   setName,
   setSurname,
   setEmail,
-  setFavourites,
+  setFavorites,
   logout,
   sessionReducer,
 } from './slice/sessionSlice';

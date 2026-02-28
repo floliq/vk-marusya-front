@@ -1,19 +1,21 @@
-import { useCallback, useEffect } from 'react';
-// eslint-disable-next-line no-restricted-imports
+import { useCallback, useEffect, useRef } from 'react';
+/* eslint-disable no-restricted-imports -- FSD: фича не импортирует из app */
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useLoginMutation,
   useGetProfileQuery,
-  useLogoutQuery,
+  useLogoutMutation,
   selectIsAuth,
+  selectIsAuthChecking,
   selectName,
   setIsAuth,
+  setIsAuthChecking,
   setName,
   logout as logoutAction,
-  selectFavourites,
+  selectFavorites,
   selectSurname,
   selectEmail,
-  setFavourites,
+  setFavorites,
   setEmail,
   setSurname,
 } from '@/entities/session';
@@ -21,30 +23,45 @@ import {
 export const useAuth = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+  const isAuthChecking = useSelector(selectIsAuthChecking);
   const name = useSelector(selectName);
   const surname = useSelector(selectSurname);
   const email = useSelector(selectEmail);
-  const favourites = useSelector(selectFavourites);
-
+  const favourites = useSelector(selectFavorites);
+  const [logoutMutation] = useLogoutMutation();
   const [loginMutation] = useLoginMutation();
-  const { refetch: logoutRefetch } = useLogoutQuery();
-  const { data, isError, refetch } = useGetProfileQuery();
+
+  const { data, isError, isLoading, isFetching, refetch } =
+    useGetProfileQuery();
+  const wasFetching = useRef(false);
 
   useEffect(() => {
+    const justFinishedFetching = wasFetching.current && !isFetching;
+    wasFetching.current = isFetching;
+
+    if (isLoading) {
+      dispatch(setIsAuthChecking(true));
+      return;
+    }
+
+    dispatch(setIsAuthChecking(false));
+
     if (data) {
       dispatch(setIsAuth(true));
       dispatch(setName(data.name));
       dispatch(setSurname(data.surname));
       dispatch(setEmail(data.email));
-      dispatch(setFavourites(data.favourites));
+      if (justFinishedFetching) {
+        dispatch(setFavorites(data.favorites));
+      }
     } else if (isError) {
       dispatch(setIsAuth(false));
       dispatch(setName(null));
       dispatch(setSurname(null));
       dispatch(setEmail(null));
-      dispatch(setFavourites([]));
+      dispatch(setFavorites([]));
     }
-  }, [data, isError, dispatch]);
+  }, [data, isError, isLoading, isFetching, dispatch]);
 
   const login = useCallback(
     async (
@@ -65,12 +82,16 @@ export const useAuth = () => {
 
   const logout = useCallback(async () => {
     try {
-      await logoutRefetch();
+      await logoutMutation().unwrap();
     } catch {
-      // Куки могут очищаться только на бэкенде, при ошибке всё равно сбрасываем состояние
+      dispatch(setIsAuth(false));
+      dispatch(setName(null));
+      dispatch(setSurname(null));
+      dispatch(setEmail(null));
+      dispatch(setFavorites([]));
     }
     dispatch(logoutAction());
-  }, [dispatch, logoutRefetch]);
+  }, [dispatch, logoutMutation]);
 
   const checkAuth = useCallback(async (): Promise<boolean> => {
     const result = await refetch();
@@ -79,6 +100,7 @@ export const useAuth = () => {
 
   return {
     isAuth,
+    isAuthChecking,
     name,
     surname,
     email,

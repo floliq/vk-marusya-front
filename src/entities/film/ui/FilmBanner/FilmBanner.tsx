@@ -8,10 +8,24 @@ import { formatRuntime, translateGenre } from '@/shared/lib';
 type FilmBannerProps = {
   film: Film;
   onTrailerClick?: () => void;
+  isLiked?: boolean;
+  isFavouriteLoading?: boolean;
+  onFavouriteClick?: () => void;
 };
 
-export const FilmBanner = ({ film, onTrailerClick }: FilmBannerProps) => {
+export const FilmBanner = ({
+  film,
+  onTrailerClick,
+  isLiked = false,
+  isFavouriteLoading = false,
+  onFavouriteClick,
+}: FilmBannerProps) => {
   const genre = film.genres[0] ? translateGenre(film.genres[0]) : '';
+
+  const handleFavouriteClick = () => {
+    if (isFavouriteLoading) return;
+    onFavouriteClick?.();
+  };
 
   return (
     <section className={styles['film-banner']}>
@@ -39,17 +53,25 @@ export const FilmBanner = ({ film, onTrailerClick }: FilmBannerProps) => {
               >
                 Трейлер
               </Button>
-              <button className={styles['film-banner__favourite']}>
-                <LikeIcon />
+              <button
+                className={`${styles['film-banner__favourite']} ${isLiked ? styles['film-banner__favourite-liked'] : ''}`}
+                onClick={handleFavouriteClick}
+                disabled={isFavouriteLoading}
+              >
+                <LikeIcon filled={isLiked} />
               </button>
             </div>
           </div>
           <div className={styles['film-banner__right']}>
-            <img
-              className={styles['film-banner__picture']}
-              src={film.backdropUrl ?? film.posterUrl ?? ''}
-              alt='Банер'
-            />
+            {film.backdropUrl ? (
+              <img
+                className={styles['film-banner__picture']}
+                src={film.backdropUrl}
+                alt={film.title}
+              />
+            ) : (
+              <div className={styles['film-banner__placeholder']} />
+            )}
           </div>
         </div>
       </Container>
