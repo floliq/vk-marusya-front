@@ -1,5 +1,5 @@
 import { Rating } from '@/shared/ui';
-import styles from './SearchFilmLIst.module.scss';
+import styles from './SearchFilmList.module.scss';
 import { Link } from 'react-router-dom';
 import { SearchFilmListMobile } from '../search-film-list-mobile/SearchFilmListMobile';
 import type { Film } from '@/entities/film';

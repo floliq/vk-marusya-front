@@ -4,11 +4,15 @@ import { LoginForm } from './login-form/LoginForm';
 import { RegisterForm } from './register-form/RegisterForm';
 import { SuccessForm } from './success-form/SuccessForm';
 
-export const AuthForm = () => {
+type AuthFormProps = {
+  onSuccess: () => void;
+};
+
+export const AuthForm = ({ onSuccess }: AuthFormProps) => {
   const [authState, setAuthState] = useState<'login' | 'register'>('login');
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const onSuccessClickHandler = () => {
+  const onSuccessRegisterClickHandler = () => {
     setIsSuccess(false);
     setAuthState('login');
   };
@@ -27,6 +31,7 @@ export const AuthForm = () => {
               onSwitchToRegister={() => {
                 setAuthState('register');
               }}
+              onSuccess={onSuccess}
             />
           ) : (
             <RegisterForm
@@ -39,7 +44,7 @@ export const AuthForm = () => {
             />
           )
         ) : (
-          <SuccessForm onSuccessClickHandler={onSuccessClickHandler} />
+          <SuccessForm onSuccessClickHandler={onSuccessRegisterClickHandler} />
         )}
       </div>
     </div>

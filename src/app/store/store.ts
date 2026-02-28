@@ -3,12 +3,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { filmsApi } from '@/entities/film';
 import { genreApi } from '@/entities/genre';
-import { sessionApi } from '@/entities/session';
+import { sessionApi, sessionReducer } from '@/entities/session';
 
 const rootReducer = combineReducers({
   [filmsApi.reducerPath]: filmsApi.reducer,
   [genreApi.reducerPath]: genreApi.reducer,
   [sessionApi.reducerPath]: sessionApi.reducer,
+  session: sessionReducer,
 });
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;

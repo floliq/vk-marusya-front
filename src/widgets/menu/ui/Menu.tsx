@@ -5,10 +5,11 @@ import { MobileMenu } from './mobile-menu/MobileMenu';
 import { useState } from 'react';
 import { AuthForm } from './auth-form/AuthForm';
 import { SearchFilm } from './search-film/SearchFilm';
+import { useAuth } from '@/widgets/menu';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [isAuth] = useState(false);
+  const { isAuth, userName } = useAuth();
 
   return (
     <header className={styles.menu}>
@@ -63,7 +64,7 @@ export const Menu = () => {
                   : `${styles.menu__link} ${styles.menu__auth}`
               }
             >
-              Константин
+              {userName ?? ''}
             </NavLink>
           )}
         </div>
@@ -80,7 +81,11 @@ export const Menu = () => {
           setIsAuthOpen(false);
         }}
       >
-        <AuthForm />
+        <AuthForm
+          onSuccess={() => {
+            setIsAuthOpen(false);
+          }}
+        />
       </Modal>
     </header>
   );

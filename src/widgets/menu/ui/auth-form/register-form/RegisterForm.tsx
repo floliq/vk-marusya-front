@@ -39,8 +39,8 @@ export const RegisterForm = ({
       return;
     }
     try {
-      await registerMutation(data).unwrap();
-      onSuccessClickHandler();
+      const response = await registerMutation(data).unwrap();
+      if (response.success) onSuccessClickHandler();
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +49,7 @@ export const RegisterForm = ({
   return (
     <div className={styles.register}>
       <h3 className={styles.register__title}>Регистрация</h3>
-      <form onSubmit={(e) => void handleSubmit(onSubmit)(e)} noValidate>
+      <form onSubmit={(e) => void handleSubmit(onSubmit)(e)}>
         <FormInput
           theme='light'
           icon={<EmailIcon />}
