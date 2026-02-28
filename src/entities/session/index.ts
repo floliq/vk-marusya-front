@@ -11,9 +11,10 @@ export {
   favouritesApi,
   useAddFavouriteMutation,
   useRemoveFavouriteMutation,
+  useGetFavouritesQuery,
 } from './api/favoiritesApi';
 export { loginSchema } from './model/schemas';
-export type { LoginFormData } from './model/types';
+export type { LoginFormData, FavouriteFilm } from './model/types';
 export {
   selectIsAuth,
   selectIsAuthChecking,

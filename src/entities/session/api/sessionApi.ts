@@ -8,14 +8,17 @@ export const sessionApi = createApi({
     baseUrl: '/api',
     credentials: 'include',
   }),
+  tagTypes: ['Profile'],
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     getProfile: builder.query<Profile, void>({
       query: () => '/profile',
+      providesTags: ['Profile'],
     }),
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     logout: builder.mutation<SessionResult, void>({
       query: () => ({ url: '/auth/logout', method: 'GET' }),
+      invalidatesTags: ['Profile'],
     }),
     register: builder.mutation<SessionResult, RegisterFormData>({
       query: (formData) => ({
@@ -26,6 +29,7 @@ export const sessionApi = createApi({
           'Content-Type': 'application/json',
         },
       }),
+      invalidatesTags: ['Profile'],
     }),
     login: builder.mutation<SessionResult, LoginFormData>({
       query: (formData) => ({
@@ -36,6 +40,7 @@ export const sessionApi = createApi({
           'Content-Type': 'application/json',
         },
       }),
+      invalidatesTags: ['Profile'],
     }),
   }),
 });

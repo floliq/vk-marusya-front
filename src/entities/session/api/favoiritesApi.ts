@@ -8,10 +8,12 @@ export const favouritesApi = createApi({
     baseUrl: '/api',
     credentials: 'include',
   }),
+  tagTypes: ['Favourites'],
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     getFavourites: builder.query<FavouriteFilm[], void>({
       query: () => '/favorites',
+      providesTags: ['Favourites'],
     }),
     addFavourite: builder.mutation<SessionResult, number>({
       query: (id) => ({
@@ -22,6 +24,7 @@ export const favouritesApi = createApi({
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }),
+      invalidatesTags: ['Favourites'],
     }),
     removeFavourite: builder.mutation<Profile, number>({
       query: (filmId) => ({
@@ -31,6 +34,7 @@ export const favouritesApi = createApi({
           'Content-Type': 'application/json',
         },
       }),
+      invalidatesTags: ['Favourites'],
     }),
   }),
 });

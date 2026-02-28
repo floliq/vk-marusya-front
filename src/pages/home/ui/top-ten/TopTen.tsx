@@ -5,7 +5,7 @@ import { FilmItem, useGetTopFilmsQuery } from '@/entities/film';
 import { Skeleton } from '@/shared/ui';
 
 export const TopTen = () => {
-  const { data: films, isLoading } = useGetTopFilmsQuery();
+  const { data: films = [], isLoading } = useGetTopFilmsQuery();
 
   if (isLoading) {
     return (
@@ -16,13 +16,23 @@ export const TopTen = () => {
       </section>
     );
   }
+
+  if (films.length === 0) {
+    return (
+      <section className={styles.top}>
+        <div className='container fluid'>
+          <p>Фильмов нет</p>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className={styles.top}>
       <div className='container fluid'>
         <div className={styles.top__content}>
           <h2 className={styles.top__title}>Топ 10 фильмов</h2>
           <ul className={styles.top__films}>
-            {films?.map((film, index) => (
+            {films.map((film, index) => (
               <li key={film.id} className={styles.top__film}>
                 <span className={styles.top__number}>{index + 1}</span>
                 <FilmItem
@@ -50,7 +60,7 @@ export const TopTen = () => {
               1024: { slidesPerView: 'auto', enabled: false },
             }}
           >
-            {films?.map((film, index) => (
+            {films.map((film, index) => (
               <SwiperSlide key={film.id} className={styles.swiperSlide}>
                 <li className={styles.top__film}>
                   <span className={styles.top__number}>{index + 1}</span>
