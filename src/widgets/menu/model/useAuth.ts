@@ -4,34 +4,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   useLoginMutation,
   useGetProfileQuery,
-  useLogoutMutation,
+  useLogoutQuery,
   selectIsAuth,
-  selectUserName,
+  selectName,
   setIsAuth,
-  setUserName,
+  setName,
   logout as logoutAction,
+  selectFavourites,
+  selectSurname,
+  selectEmail,
+  setFavourites,
+  setEmail,
+  setSurname,
 } from '@/entities/session';
 
-/**
- * Проверка авторизации по cookie-сессии (koa.sess, koa.sess.sig).
- * Запрос GET /api/profile идёт с credentials: 'include', сервер по куки определяет пользователя.
- */
 export const useAuth = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const userName = useSelector(selectUserName);
+  const name = useSelector(selectName);
+  const surname = useSelector(selectSurname);
+  const email = useSelector(selectEmail);
+  const favourites = useSelector(selectFavourites);
 
   const [loginMutation] = useLoginMutation();
-  const [logoutMutation] = useLogoutMutation();
+  const { refetch: logoutRefetch } = useLogoutQuery();
   const { data, isError, refetch } = useGetProfileQuery();
 
   useEffect(() => {
     if (data) {
       dispatch(setIsAuth(true));
-      dispatch(setUserName(data.name));
+      dispatch(setName(data.name));
+      dispatch(setSurname(data.surname));
+      dispatch(setEmail(data.email));
+      dispatch(setFavourites(data.favourites));
     } else if (isError) {
       dispatch(setIsAuth(false));
-      dispatch(setUserName(null));
+      dispatch(setName(null));
+      dispatch(setSurname(null));
+      dispatch(setEmail(null));
+      dispatch(setFavourites([]));
     }
   }, [data, isError, dispatch]);
 
@@ -54,12 +65,12 @@ export const useAuth = () => {
 
   const logout = useCallback(async () => {
     try {
-      await logoutMutation().unwrap();
+      await logoutRefetch();
     } catch {
-      // Куки могут очищаться только на бэкенде; при ошибке всё равно сбрасываем состояние
+      // Куки могут очищаться только на бэкенде, при ошибке всё равно сбрасываем состояние
     }
     dispatch(logoutAction());
-  }, [dispatch, logoutMutation]);
+  }, [dispatch, logoutRefetch]);
 
   const checkAuth = useCallback(async (): Promise<boolean> => {
     const result = await refetch();
@@ -68,7 +79,10 @@ export const useAuth = () => {
 
   return {
     isAuth,
-    userName,
+    name,
+    surname,
+    email,
+    favourites,
     login,
     logout,
     checkAuth,

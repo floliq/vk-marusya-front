@@ -9,7 +9,7 @@ import { useAuth } from '@/widgets/menu';
 
 export const Menu = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const { isAuth, userName } = useAuth();
+  const { isAuth, name } = useAuth();
 
   return (
     <header className={styles.menu}>
@@ -64,7 +64,7 @@ export const Menu = () => {
                   : `${styles.menu__link} ${styles.menu__auth}`
               }
             >
-              {userName ?? ''}
+              {name ?? ''}
             </NavLink>
           )}
         </div>

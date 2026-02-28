@@ -8,7 +8,10 @@ export type SessionResult = {
 export type SessionState = {
   isAuth: boolean;
   isAuthChecking: boolean;
-  userName: string | null;
+  name: string | null;
+  surname: string | null;
+  email: string | null;
+  favourites: string[];
 };
 
 export type Profile = {

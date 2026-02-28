@@ -3,14 +3,20 @@ import styles from './Film.module.scss';
 
 type FilmItemProps = {
   id: number;
-  image_url: string;
+  image_url: string | null;
 };
 
 export const FilmItem = ({ id, image_url }: FilmItemProps) => {
   return (
     <div className={styles.film}>
-      <Link to={`/films/${id}`}>
-        <img className={styles.film__banner} src={image_url} alt={`Фильм`} />
+      <Link to={`/films/${id}`} className={styles.film__link}>
+        {image_url && (
+          <img
+            className={styles.film__banner}
+            src={image_url}
+            alt={`Фильм ${id}`}
+          />
+        )}
       </Link>
     </div>
   );

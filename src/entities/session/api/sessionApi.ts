@@ -14,8 +14,8 @@ export const sessionApi = createApi({
       query: () => '/profile',
     }),
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    logout: builder.mutation<SessionResult, void>({
-      query: () => ({ url: '/auth/logout', method: 'POST' }),
+    logout: builder.query<SessionResult, void>({
+      query: () => '/auth/logout',
     }),
     register: builder.mutation<SessionResult, RegisterFormData>({
       query: (formData) => ({
@@ -44,5 +44,5 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useGetProfileQuery,
-  useLogoutMutation,
+  useLogoutQuery,
 } = sessionApi;
